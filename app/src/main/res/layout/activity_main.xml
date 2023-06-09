@@ -40,13 +40,12 @@
             android:layout_marginBottom="8dp" />
 
         <Button
-            android:id="@+id/buttonLogin"
+            android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/log_in" />
 
         <TextView
-            android:id="@+id/textViewRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -60,17 +59,21 @@
             android:layout_marginTop="16dp">
 
             <Button
-                android:id="@+id/buttonRegisterStudent"
+                android:id="@+id/btnRegisterStudent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/register_as_student" />
+                android:text="@string/register_as_student"
+                android:textSize="16sp"
+                style="?android:attr/buttonBarButtonStyle" />
 
             <Button
-                android:id="@+id/buttonRegisterTutor"
+                android:id="@+id/btnRegisterTutor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/register_as_tutor"
-                android:layout_marginStart="16dp" />
+                android:layout_marginStart="16dp"
+                android:textSize="16sp"
+                style="?android:attr/buttonBarButtonStyle" />
 
         </LinearLayout>
     </LinearLayout>
