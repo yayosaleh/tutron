@@ -1,7 +1,6 @@
 package com.example.tutron;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
 public class StudentRegistrationActivity extends AppCompatActivity {
