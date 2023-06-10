@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tutor_registration"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fill_in_the_following_information_scroll_down_to_submit"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/personal_info"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/editTextTutorFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/first_name"/>
+
+        <EditText
+            android:id="@+id/editTextTutorLastName"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/last_name"/>
+
+        <EditText
+            android:id="@+id/editTextTutorEmail"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"/>
+
+        <EditText
+            android:id="@+id/editTextTutorPassword"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/password"
+            android:layout_marginBottom="16dp"
+            android:inputType="textPassword"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tutoring_details"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/native_language"
+            android:layout_gravity="start"
+            android:layout_marginBottom="8dp" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupNativeLanguage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp">
+
+            <RadioButton
+                android:id="@+id/radioButtonEnglish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/english" />
+
+            <RadioButton
+                android:id="@+id/radioButtonFrench"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/french" />
+
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/education_level"
+            android:layout_gravity="start"
+            android:layout_marginBottom="8dp" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupEducationLevel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/radioButtonHighSchool"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/high_school_diploma" />
+
+            <RadioButton
+                android:id="@+id/radioButtonBachelor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/bachelor_s_degree" />
+
+            <RadioButton
+                android:id="@+id/radioButtonMaster"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/master_s_degree" />
+
+            <RadioButton
+                android:id="@+id/radioButtonPhD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/phd" />
+
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/editTextExperience"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/tell_us_about_your_tutoring_experience"
+            android:inputType="textMultiLine"
+            android:lines="5"
+            android:maxLines="5"
+            android:minLines="5"
+            android:maxLength="600"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/btnTutorSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/submit" />
+
+    </LinearLayout>
+
+</ScrollView>
