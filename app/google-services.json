@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "321143414180",
+    "project_id": "tutron-cbd05",
+    "storage_bucket": "tutron-cbd05.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:321143414180:android:d9ffeb4b73c7e1d32af531",
+        "android_client_info": {
+          "package_name": "com.example.tutron"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "321143414180-pu881qisqi479gbsrbm2btlkfbff929e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjyd_IxZD0lPSx4av-RDtl_UFT9YLdFxY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "321143414180-pu881qisqi479gbsrbm2btlkfbff929e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
