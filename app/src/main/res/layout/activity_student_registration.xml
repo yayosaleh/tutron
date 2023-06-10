@@ -1,117 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="16dp">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/student_registration"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="5dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/fill_in_the_following_information"
-        android:layout_marginBottom="16dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/personal_info"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/editTextStudentFirstName"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="@string/first_name" />
-
-    <EditText
-        android:id="@+id/editTextStudentLastName"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="@string/last_name" />
-
-    <EditText
-        android:id="@+id/editTextStudentEmail"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress"/>
-
-    <EditText
-        android:id="@+id/editTextStudentPassword"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        android:layout_marginBottom="10dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/payment_info"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/editTextAddress"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="@string/address" />
-
-    <EditText
-        android:id="@+id/editTextCity"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="@string/city" />
-
-    <EditText
-        android:id="@+id/editTextProvince"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="@string/province" />
-
-    <EditText
-        android:id="@+id/editTextPostalCode"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="@string/postal_code" />
-
-    <EditText
-        android:id="@+id/editTextCreditCard"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="@string/credit_card_number"
-        android:inputType="number"/>
-
-    <EditText
-        android:id="@+id/editTextExpiry"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="@string/expiry" />
-
-    <EditText
-        android:id="@+id/editTextCVV"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="@string/cvv"
-        android:inputType="number"
-        android:layout_marginBottom="16dp"/>
-
-    <Button
-        android:id="@+id/btnStudentSubmit"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/submit" />
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-</LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/student_registration"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="5dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/fill_in_the_following_information_scroll_down_to_submit"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/personal_info"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editTextStudentFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/first_name" />
+
+        <EditText
+            android:id="@+id/editTextStudentLastName"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/last_name" />
+
+        <EditText
+            android:id="@+id/editTextStudentEmail"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"/>
+
+        <EditText
+            android:id="@+id/editTextStudentPassword"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/payment_info"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editTextAddress"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/address" />
+
+        <EditText
+            android:id="@+id/editTextCity"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/city" />
+
+        <EditText
+            android:id="@+id/editTextProvince"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/province" />
+
+        <EditText
+            android:id="@+id/editTextPostalCode"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/postal_code" />
+
+        <EditText
+            android:id="@+id/editTextCreditCard"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/credit_card_number"
+            android:inputType="number"/>
+
+        <EditText
+            android:id="@+id/editTextExpiry"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/expiry" />
+
+        <EditText
+            android:id="@+id/editTextCVV"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/cvv"
+            android:inputType="number"
+            android:layout_marginBottom="16dp"/>
+
+        <Button
+            android:id="@+id/btnStudentSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/submit" />
+
+    </LinearLayout>
+
+</ScrollView>
