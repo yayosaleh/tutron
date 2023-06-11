@@ -33,4 +33,7 @@
     <string name="master_s_degree">Master’s Degree</string>
     <string name="phd">PhD</string>
     <string name="tell_us_about_your_tutoring_experience">Tell us about your tutoring experience...</string>
+    <string name="welcome">Welcome!</string>
+    <string name="you_are_logged_in_as">You are logged in as</string>
+    <string name="log_off">Log off</string>
 </resources>
