@@ -7,7 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,17 +21,31 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Initialize component vars
+        // Declare and initialize component variables
         EditText editTextEmail = findViewById(R.id.editTextEmail);
         EditText editTextPassword = findViewById(R.id.editTextPassword);
         Button btnLogin = findViewById(R.id.btnLogin);
         Button btnRegisterStudent = findViewById(R.id.btnRegisterStudent);
         Button btnRegisterTutor = findViewById(R.id.btnRegisterTutor);
 
+        // Create ArrayList of EditTexts for easy validation
+        ArrayList<EditText> editTexts = new ArrayList<>(Arrays.asList(
+                editTextEmail,
+                editTextPassword
+        ));
+
         // Set on click listener for login button
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Check all text inputs are non-empty
+                if(!RegistrationUtil.validTextInputs(editTexts)){
+                    Toast.makeText(MainActivity.this,
+                            "Please fill all fields!",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 // Attempt to sign user in and navigate to welcome page
                 AuthUtil.signIn(editTextEmail.getText().toString(),
                         editTextPassword.getText().toString(), MainActivity.this);
