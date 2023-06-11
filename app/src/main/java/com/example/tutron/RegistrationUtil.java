@@ -20,6 +20,7 @@ public class RegistrationUtil {
 
     private static final String TAG = "RegistrationUtil";
     private static final String STUDENT_COLLECTION = "students";
+    private static final String TUTOR_COLLECTION = "tutors";
 
     // Returns true if all text inputs are filled
     public static boolean validTextInputs(ArrayList<EditText> editTexts){
@@ -31,9 +32,8 @@ public class RegistrationUtil {
     }
 
     // Attempts to create account with given credentials and sign user in (Firebase)
-    // Calls createStudent() if successful
+    // Calls createStudentOrTutor() if successful
     public static void createAccount(String email, String password, Student student, Tutor tutor, android.content.Context context){
-
         // Access shared FirebaseAuth instance
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
@@ -49,8 +49,8 @@ public class RegistrationUtil {
                             // Log success
                             Log.d(TAG, "createUser:success");
 
-                            // Call student creation method
-                            RegistrationUtil.createStudent(student, context);
+                            // Call student/tutor creation method
+                            RegistrationUtil.createStudentOrTutor(student, tutor, context);
 
                         } else {
                             // Account creation failed
@@ -67,13 +67,12 @@ public class RegistrationUtil {
                 });
     }
 
-    // Attempts to create Student document (Firestore)
+    // Attempts to create Student or Tutor document (Firestore)
+    // One of the user types is always null
     // Navigates to WelcomeActivity if successful
-    public static void createStudent(Student student, android.content.Context context){
-
-        // Access shared FirebaseAuth and FirebaseFirestore instances
+    public static void createStudentOrTutor(Student student, Tutor tutor, android.content.Context context){
+        // Access shared FirebaseAuth instance
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         // Ensure current user is logged in
         FirebaseUser user = mAuth.getCurrentUser();
@@ -85,26 +84,53 @@ public class RegistrationUtil {
         // Firebase user ID and Firestore document ID must be the same
         String userID = user.getUid();
 
-        // Creating collections and documents in Firestore is implicit!
-        db.collection(STUDENT_COLLECTION).document(userID).set(student)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        // Create toast to mark success
-                        Toast.makeText(context, "Student registered!", Toast.LENGTH_SHORT).show();
+        // Access shared FirebaseFirestore instance
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-                        // Navigate to welcome page
-                        Intent intent = new Intent(context, WelcomeActivity.class);
-                        context.startActivity(intent);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        // Log and toast failure
-                        Log.w(TAG, "createStudent:failure", e);
-                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+        // Creating collections and documents in Firestore is implicit!
+        // Select which document to create based on nullness of student or tutor
+        if (student != null){
+            db.collection(STUDENT_COLLECTION).document(userID).set(student)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            // Create toast to mark success
+                            Toast.makeText(context, "Student registered!", Toast.LENGTH_SHORT).show();
+
+                            // Navigate to welcome page
+                            Intent intent = new Intent(context, WelcomeActivity.class);
+                            context.startActivity(intent);
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // Log and toast failure
+                            Log.w(TAG, "createStudent*:failure", e);
+                            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        } else {
+            db.collection(TUTOR_COLLECTION).document(userID).set(tutor)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            // Create toast to mark success
+                            Toast.makeText(context, "Tutor registered!", Toast.LENGTH_SHORT).show();
+
+                            // Navigate to welcome page
+                            Intent intent = new Intent(context, WelcomeActivity.class);
+                            context.startActivity(intent);
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // Log and toast failure
+                            Log.w(TAG, "createTutor*:failure", e);
+                            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
     }
 }
