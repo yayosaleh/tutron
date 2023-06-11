@@ -97,7 +97,7 @@ public class StudentRegistrationActivity extends AppCompatActivity {
 
                 String creditCardInfo = editTextCreditCard.getText().toString() + "," +
                         editTextExpiry.getText().toString() + "," +
-                        editTextExpiry.getText().toString();
+                        editTextCVV.getText().toString();
 
                 Student student = new Student(editTextFirstName.getText().toString(),
                         editTextLastName.getText().toString(), address, creditCardInfo);
