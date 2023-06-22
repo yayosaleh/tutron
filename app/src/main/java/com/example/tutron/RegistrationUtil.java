@@ -22,6 +22,8 @@ public class RegistrationUtil {
     private static final String TAG = "RegistrationUtil";
     private static final String STUDENT_COLLECTION = "students";
     private static final String TUTOR_COLLECTION = "tutors";
+    private static final Class<?> STUDENT_HOME_ACTIVITY = StudentHomeActivity.class;
+    private static final Class<?> TUTOR_HOME_ACTIVITY = TutorHomeActivity.class;
 
     // Access shared FirebaseAuth instance
     private static final FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -70,7 +72,7 @@ public class RegistrationUtil {
 
     // Attempts to create Student or Tutor document (Firestore)
     // One of the user types is always null
-    // Navigates to WelcomeActivity if successful
+    // Navigates to appropriate home activity if successful
     public static void createStudentOrTutor(Student student, Tutor tutor, Context context){
         // Ensure current user is logged in
         FirebaseUser user = mAuth.getCurrentUser();
@@ -95,8 +97,8 @@ public class RegistrationUtil {
                             // Create toast to mark success
                             Toast.makeText(context, "Student registered!", Toast.LENGTH_SHORT).show();
 
-                            // Navigate to welcome page
-                            Intent intent = new Intent(context, WelcomeActivity.class);
+                            // Navigate to student home activity
+                            Intent intent = new Intent(context, STUDENT_HOME_ACTIVITY);
                             context.startActivity(intent);
                         }
                     })
@@ -116,8 +118,8 @@ public class RegistrationUtil {
                             // Create toast to mark success
                             Toast.makeText(context, "Tutor registered!", Toast.LENGTH_SHORT).show();
 
-                            // Navigate to welcome page
-                            Intent intent = new Intent(context, WelcomeActivity.class);
+                            // Navigate to tutor home activity
+                            Intent intent = new Intent(context, TUTOR_HOME_ACTIVITY);
                             context.startActivity(intent);
                         }
                     })
