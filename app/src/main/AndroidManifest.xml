@@ -22,9 +22,6 @@
             android:name=".StudentHomeActivity"
             android:exported="false" />
         <activity
-            android:name=".WelcomeActivity"
-            android:exported="false" />
-        <activity
             android:name=".TutorRegistrationActivity"
             android:exported="false" />
         <activity
