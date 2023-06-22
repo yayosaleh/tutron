@@ -1,5 +1,6 @@
 package com.example.tutron;
 
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.EditText;
@@ -22,6 +23,9 @@ public class RegistrationUtil {
     private static final String STUDENT_COLLECTION = "students";
     private static final String TUTOR_COLLECTION = "tutors";
 
+    // Access shared FirebaseAuth instance
+    private static final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
     // Returns true if all text inputs are filled
     public static boolean validTextInputs(ArrayList<EditText> editTexts){
         for (int i = 0; i < editTexts.size(); i++){
@@ -33,10 +37,7 @@ public class RegistrationUtil {
 
     // Attempts to create account with given credentials and sign user in (Firebase)
     // Calls createStudentOrTutor() if successful
-    public static void createAccount(String email, String password, Student student, Tutor tutor, android.content.Context context){
-        // Access shared FirebaseAuth instance
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-
+    public static void createAccount(String email, String password, Student student, Tutor tutor, Context context){
         // Account creation is async., operations must be done inside OnCompleteListener
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -47,7 +48,7 @@ public class RegistrationUtil {
                             // Current user can be accessed app-wide using shared FirebaseAuth instance
 
                             // Log success
-                            Log.d(TAG, "createUser:success");
+                            Log.d(TAG, "createAccount:success");
 
                             // Call student/tutor creation method
                             RegistrationUtil.createStudentOrTutor(student, tutor, context);
@@ -56,7 +57,7 @@ public class RegistrationUtil {
                             // Account creation failed
 
                             // Log failure
-                            Log.w(TAG, "createUser:failure", task.getException());
+                            Log.w(TAG, "createAccount:failure", task.getException());
 
                             // Create toast with cause of failure
                             String failureMessage = (task.getException() != null)?
@@ -70,10 +71,7 @@ public class RegistrationUtil {
     // Attempts to create Student or Tutor document (Firestore)
     // One of the user types is always null
     // Navigates to WelcomeActivity if successful
-    public static void createStudentOrTutor(Student student, Tutor tutor, android.content.Context context){
-        // Access shared FirebaseAuth instance
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-
+    public static void createStudentOrTutor(Student student, Tutor tutor, Context context){
         // Ensure current user is logged in
         FirebaseUser user = mAuth.getCurrentUser();
         if (user == null){

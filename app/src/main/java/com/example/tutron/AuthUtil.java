@@ -1,5 +1,6 @@
 package com.example.tutron;
 
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
@@ -15,12 +16,12 @@ public class AuthUtil {
 
     private static final String TAG = "AuthUtil";
 
+    // Access shared FirebaseAuth instance
+    private static final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
     // Attempts to sign user in (Firebase)
     // Navigates to welcome activity if successful
-    public static void signIn(String email, String password, android.content.Context context){
-        // Access shared Firebase instance
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-
+    public static void signIn(String email, String password, Context context){
         // Attempt to sign in user with email and password (Firebase)
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -50,9 +51,8 @@ public class AuthUtil {
     }
 
     // Signs user out and navigates to main activity
-    public static void signOut(android.content.Context context){
-        // Access shared Firebase instance and sign user out
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    public static void signOut(Context context){
+        // Sign user out
         mAuth.signOut();
 
         // Create toast message
