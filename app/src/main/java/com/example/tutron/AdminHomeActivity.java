@@ -1,6 +1,8 @@
 package com.example.tutron;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +12,15 @@ import android.widget.Button;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
+
 public class AdminHomeActivity extends AppCompatActivity {
+    // List to store complaints from DB
+    ArrayList<Complaint> complaintList;
+    // Recycler view variables
+    private RecyclerView complaintRecyclerView;
+    private RecyclerView.Adapter complaintAdapter;
+    private RecyclerView.LayoutManager complaintLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +39,16 @@ public class AdminHomeActivity extends AppCompatActivity {
             }
         });
 
+        // Initialize RecyclerView
+        populateList();
+        complaintRecyclerView = findViewById(R.id.recyclerViewComplaints);
+        //complaintRecyclerView.setHasFixedSize(true);
+        complaintLayoutManager = new LinearLayoutManager(this);
+        complaintAdapter = new ComplaintAdapter(complaintList);
+
+        complaintRecyclerView.setLayoutManager(complaintLayoutManager);
+        complaintRecyclerView.setAdapter(complaintAdapter);
+
     }
 
     @Override
@@ -43,4 +63,32 @@ public class AdminHomeActivity extends AppCompatActivity {
         }
 
     }
+
+    // GARBAGE
+    private void populateList() {
+        Complaint complaint = new Complaint(null, null, "Tutor 1", "Tutor showed up 40 minutes late" +
+                "and charged me full price!");
+        complaintList = new ArrayList<Complaint>();
+        complaintList.add(complaint);
+        complaintList.add(complaint);
+        complaintList.add(complaint);
+        complaintList.add(complaint);
+        complaintList.add(complaint);
+        complaintList.add(complaint);
+        complaintList.add(complaint);
+        complaintList.add(complaint);
+        complaintList.add(complaint);
+        complaintList.add(complaint);
+        complaintList.add(complaint);
+        complaintList.add(complaint);
+        complaintList.add(complaint);
+        complaintList.add(complaint);
+        complaintList.add(complaint);
+        complaintList.add(complaint);
+        complaintList.add(complaint);
+        complaintList.add(complaint);
+        complaintList.add(complaint);
+        complaintList.add(complaint);
+    }
+
 }
