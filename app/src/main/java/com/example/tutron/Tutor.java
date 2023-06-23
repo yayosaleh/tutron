@@ -7,6 +7,7 @@ public class Tutor extends User {
     private String nativeLanguage;
     private String description;
     private String profilePic;
+    private String suspensionExpiry; // Should be null by default
 
     // Constructors
 
@@ -54,5 +55,12 @@ public class Tutor extends User {
 
     public void setProfilePic(String profilePic) {
         this.profilePic = profilePic;
+    }
+
+    public String getSuspensionExpiry() {
+        return suspensionExpiry;
+    }
+    public void setSuspensionExpiry(String suspensionExpiry) {
+        this.suspensionExpiry = suspensionExpiry;
     }
 }
