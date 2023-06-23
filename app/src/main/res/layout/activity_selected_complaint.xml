@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="40dp"
         android:text="@string/tutor_name"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/textViewSelectedTutorNameTitle"
@@ -33,7 +33,7 @@
         android:id="@+id/textViewSelectedTutorNameTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="40dp"
         android:text="@string/tutor"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -73,7 +73,7 @@
 
     <EditText
         android:id="@+id/editTextNumDays"
-        android:layout_width="100dp"
+        android:layout_width="120dp"
         android:layout_height="48dp"
         android:layout_marginStart="10dp"
         android:ems="10"

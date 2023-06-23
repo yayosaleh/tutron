@@ -1,6 +1,11 @@
 package com.example.tutron;
 
-public class Complaint {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
+public class Complaint implements Parcelable {
     private String id;
     private String tutorId;
     private String tutorName;
@@ -16,6 +21,25 @@ public class Complaint {
         this.tutorName = tutorName;
         this.description = description;
     }
+
+    protected Complaint(Parcel in) {
+        id = in.readString();
+        tutorId = in.readString();
+        tutorName = in.readString();
+        description = in.readString();
+    }
+
+    public static final Creator<Complaint> CREATOR = new Creator<Complaint>() {
+        @Override
+        public Complaint createFromParcel(Parcel in) {
+            return new Complaint(in);
+        }
+
+        @Override
+        public Complaint[] newArray(int size) {
+            return new Complaint[size];
+        }
+    };
 
     public String getId() {
         return id;
@@ -47,5 +71,18 @@ public class Complaint {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(tutorId);
+        dest.writeString(tutorName);
+        dest.writeString(description);
     }
 }

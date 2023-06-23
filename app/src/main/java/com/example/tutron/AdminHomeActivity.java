@@ -15,6 +15,8 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.ArrayList;
 
 public class AdminHomeActivity extends AppCompatActivity {
+    private static final Class<?> ITEM_ON_CLICK_DEST = SelectedComplaintActivity.class;
+
     // List to store complaints from DB
     ArrayList<Complaint> complaintList;
     // Recycler view variables
@@ -100,9 +102,10 @@ public class AdminHomeActivity extends AppCompatActivity {
         complaintAdapter.setOnItemClickListener(new ComplaintAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                // TEST
-                complaintList.get(position).setTutorName("CLICKED");
-                complaintAdapter.notifyItemChanged(position);
+                // Navigate to SelectedComplaintActivity and send selected Complaint
+                Intent intent = new Intent(AdminHomeActivity.this, ITEM_ON_CLICK_DEST);
+                intent.putExtra("Selected Complaint", complaintList.get(position));
+                startActivity(intent);
             }
         });
     }
