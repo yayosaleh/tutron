@@ -63,7 +63,7 @@ public class TutorRegistrationActivity extends AppCompatActivity {
                 RadioButton rBtnNativeLanguage = findViewById(nativeLanguageRadioGroup.getCheckedRadioButtonId());
                 String educationLevel = rBtnEducationLevel.getText().toString();
                 String nativeLanguage = rBtnNativeLanguage.getText().toString();
-                Tutor tutor = new Tutor(editTextFirstName.getText().toString(), editTextLastName.getText().toString(),
+                Tutor tutor = new Tutor(null, editTextFirstName.getText().toString(), editTextLastName.getText().toString(),
                         educationLevel, nativeLanguage, editTextExperience.getText().toString(), null);
 
                 // Attempt to create account and register tutor

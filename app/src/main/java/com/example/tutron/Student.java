@@ -13,8 +13,8 @@ public class Student extends User {
         //public no-arg constructor needed to create Firestore documents
     }
 
-    public Student(String firstName, String lastName, String address, String creditCardInfo) {
-        super(firstName, lastName);
+    public Student(String id, String firstName, String lastName, String address, String creditCardInfo) {
+        super(id, firstName, lastName);
         this.address = address;
         this.creditCardInfo = creditCardInfo;
     }

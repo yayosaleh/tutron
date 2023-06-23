@@ -74,7 +74,7 @@ public class StudentRegistrationActivity extends AppCompatActivity {
                         editTextExpiry.getText().toString() + "," +
                         editTextCVV.getText().toString();
 
-                Student student = new Student(editTextFirstName.getText().toString(),
+                Student student = new Student(null, editTextFirstName.getText().toString(),
                         editTextLastName.getText().toString(), address, creditCardInfo);
 
                 // Attempt to create account and register student

@@ -90,6 +90,8 @@ public class RegistrationUtil {
         // Creating collections and documents in Firestore is implicit!
         // Select which document to create based on nullness of student or tutor
         if (student != null){
+            // Set student id
+            student.setId(userID);
             db.collection(STUDENT_COLLECTION).document(userID).set(student)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -111,6 +113,8 @@ public class RegistrationUtil {
                         }
                     });
         } else {
+            // Set tutor id
+            tutor.setId(userID);
             db.collection(TUTOR_COLLECTION).document(userID).set(tutor)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
