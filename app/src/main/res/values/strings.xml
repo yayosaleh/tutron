@@ -38,4 +38,8 @@
     <string name="log_off">Log off</string>
     <string name="welcome_student">Welcome, student!</string>
     <string name="welcome_tutor">Welcome, tutor!</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="suspend_temporarily">Suspend Temporarily</string>
+    <string name="suspend_permanently">Suspend Permanently</string>
+    <string name="number_of_days">Number of days</string>
 </resources>

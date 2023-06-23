@@ -10,7 +10,7 @@ public class User {
     // Constructors
 
     public User() {
-        //public no-arg constructor needed to create Firestore documents
+        // Public no-arg constructor needed to create Firestore documents
     }
 
     public User(String id, String firstName, String lastName) {
