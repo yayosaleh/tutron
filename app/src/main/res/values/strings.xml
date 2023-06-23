@@ -45,4 +45,5 @@
     <string name="tutor">Tutor:</string>
     <string name="tutor_name">Tutor Name</string>
     <string name="complaint_description">Complaint Description</string>
+    <string name="complaints">Complaints</string>
 </resources>
