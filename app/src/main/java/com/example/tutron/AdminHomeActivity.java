@@ -19,7 +19,7 @@ public class AdminHomeActivity extends AppCompatActivity {
     ArrayList<Complaint> complaintList;
     // Recycler view variables
     private RecyclerView complaintRecyclerView;
-    private RecyclerView.Adapter complaintAdapter;
+    private ComplaintAdapter complaintAdapter;
     private RecyclerView.LayoutManager complaintLayoutManager;
 
     @Override
@@ -41,13 +41,7 @@ public class AdminHomeActivity extends AppCompatActivity {
 
         // Initialize RecyclerView
         populateList();
-        complaintRecyclerView = findViewById(R.id.recyclerViewComplaints);
-        //complaintRecyclerView.setHasFixedSize(true);
-        complaintLayoutManager = new LinearLayoutManager(this);
-        complaintAdapter = new ComplaintAdapter(complaintList);
-
-        complaintRecyclerView.setLayoutManager(complaintLayoutManager);
-        complaintRecyclerView.setAdapter(complaintAdapter);
+        populateRecyclerView();
 
     }
 
@@ -68,7 +62,7 @@ public class AdminHomeActivity extends AppCompatActivity {
     private void populateList() {
         Complaint complaint = new Complaint(null, null, "Tutor 1", "Tutor showed up 40 minutes late" +
                 "and charged me full price!");
-        complaintList = new ArrayList<Complaint>();
+        complaintList = new ArrayList<>();
         complaintList.add(complaint);
         complaintList.add(complaint);
         complaintList.add(complaint);
@@ -91,4 +85,25 @@ public class AdminHomeActivity extends AppCompatActivity {
         complaintList.add(complaint);
     }
 
+    public void populateRecyclerView() {
+        // Get RV
+        complaintRecyclerView = findViewById(R.id.recyclerViewComplaints);
+        // Create layout manager -> pass activity
+        complaintLayoutManager = new LinearLayoutManager(this);
+        // Create adapter -> pass complaint list
+        complaintAdapter = new ComplaintAdapter(complaintList);
+        // Set layout
+        complaintRecyclerView.setLayoutManager(complaintLayoutManager);
+        // Set adapter
+        complaintRecyclerView.setAdapter(complaintAdapter);
+        // Set on item click listener
+        complaintAdapter.setOnItemClickListener(new ComplaintAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                // TEST
+                complaintList.get(position).setTutorName("CLICKED");
+                complaintAdapter.notifyItemChanged(position);
+            }
+        });
+    }
 }
