@@ -27,11 +27,11 @@ public class DateTimeHandler {
         return LocalDate.parse(dateString, formatter);
     }
 
-    // Returns true if provided date is in the past
+    // Returns true if provided date is in the past or is today
     public static boolean isInPast(LocalDate date) {
         LocalDate currentDate = LocalDate.now();
         int comparison = date.compareTo(currentDate);
-        return comparison < 0;
+        return comparison <= 0;
     }
 
 }
