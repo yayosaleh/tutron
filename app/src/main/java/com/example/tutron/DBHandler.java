@@ -19,8 +19,9 @@ import java.util.ArrayList;
 public class DBHandler {
 
     private static final String TAG = "DBHandler";
-    private static final String TUTOR_COLLECTION = "tutors";
-    private static final String COMPLAINT_COLLECTION = "complaints";
+    public static final String TUTOR_COLLECTION = "tutors";
+    public static final String COMPLAINT_COLLECTION = "complaints";
+    private static final String TUTOR_SUSPENSION_EXPIRY_KEY = "suspensionExpiry";
 
     // Converts Firestore documents (in QuerySnapshot) into ArrayList of objects
     public static <T> ArrayList<T> querySnapshotToList(QuerySnapshot querySnapshot, Class<T> itemClass) {
@@ -42,7 +43,8 @@ public class DBHandler {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         // Assume name of document type is the same as collection id
-        final String documentType = collectionId.substring(0, collectionId.length() - 1);
+        final String documentType = collectionId.substring(0,1).toUpperCase() +
+                collectionId.substring(1, collectionId.length() - 1);
 
         // Attempt to delete document
         db.collection(collectionId).document(documentId).delete()
@@ -94,16 +96,12 @@ public class DBHandler {
         }
         final String finalSuccessMessage = successMessage;
 
-        // Create tutor object used to update suspension status
-        Tutor tutor = new Tutor();
-        tutor.setSuspensionExpiry(suspensionExpiry);
-
         // Access shared Firestore database instance
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         // Attempt to suspend tutor
-        // Here, we MERGE object with current tutor document
-        db.collection(TUTOR_COLLECTION).document(tutorId).set(tutor, SetOptions.merge())
+        // Here, we use update() to modify a single field in the tutor document
+        db.collection(TUTOR_COLLECTION).document(tutorId).update(TUTOR_SUSPENSION_EXPIRY_KEY, suspensionExpiry)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
@@ -125,5 +123,4 @@ public class DBHandler {
                     }
                 });
     }
-
 }

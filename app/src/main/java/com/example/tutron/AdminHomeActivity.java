@@ -23,7 +23,6 @@ import java.util.ArrayList;
 
 public class AdminHomeActivity extends AppCompatActivity {
     private static final String TAG = "AdminHomeActivity";
-    private static final String COMPLAINT_COLLECTION = "complaints";
     private static final Class<?> ITEM_ON_CLICK_DEST = SelectedComplaintActivity.class;
 
     // List to store complaints from DB
@@ -69,7 +68,7 @@ public class AdminHomeActivity extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         // Attempt to get complaint collection
-        db.collection(COMPLAINT_COLLECTION).get()
+        db.collection(DBHandler.COMPLAINT_COLLECTION).get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot querySnapshot) {
