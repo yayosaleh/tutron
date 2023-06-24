@@ -1,6 +1,5 @@
 package com.example.tutron;
 
-import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -15,8 +14,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class DBHandler {

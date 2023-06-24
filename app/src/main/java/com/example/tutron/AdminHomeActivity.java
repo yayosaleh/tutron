@@ -1,28 +1,33 @@
 package com.example.tutron;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
 public class AdminHomeActivity extends AppCompatActivity {
+    private static final String TAG = "AdminHomeActivity";
+    private static final String COMPLAINT_COLLECTION = "complaints";
     private static final Class<?> ITEM_ON_CLICK_DEST = SelectedComplaintActivity.class;
 
     // List to store complaints from DB
     ArrayList<Complaint> complaintList;
-    // Recycler view variables
-    private RecyclerView complaintRecyclerView;
-    private ComplaintAdapter complaintAdapter;
-    private RecyclerView.LayoutManager complaintLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +45,6 @@ public class AdminHomeActivity extends AppCompatActivity {
                 AuthUtil.signOut(AdminHomeActivity.this);
             }
         });
-
-        // Initialize RecyclerView
-        populateList();
-        populateRecyclerView();
-
     }
 
     @Override
@@ -58,42 +58,51 @@ public class AdminHomeActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
+        // Populate list of complaints from DB everytime activity is navigated to
+        populateList();
     }
 
-    // GARBAGE
+    // Gets complaints from DB and populates complaints list
+    // Builds RecyclerView if successful
     private void populateList() {
-        Complaint complaint = new Complaint(null, null, "Tutor 1", "Tutor showed up 40 minutes late" +
-                "and charged me full price!");
-        complaintList = new ArrayList<>();
-        complaintList.add(complaint);
-        complaintList.add(complaint);
-        complaintList.add(complaint);
-        complaintList.add(complaint);
-        complaintList.add(complaint);
-        complaintList.add(complaint);
-        complaintList.add(complaint);
-        complaintList.add(complaint);
-        complaintList.add(complaint);
-        complaintList.add(complaint);
-        complaintList.add(complaint);
-        complaintList.add(complaint);
-        complaintList.add(complaint);
-        complaintList.add(complaint);
-        complaintList.add(complaint);
-        complaintList.add(complaint);
-        complaintList.add(complaint);
-        complaintList.add(complaint);
-        complaintList.add(complaint);
-        complaintList.add(complaint);
+        // Access shared Firestore database instance
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        // Attempt to get complaint collection
+        db.collection(COMPLAINT_COLLECTION).get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot querySnapshot) {
+                        // Populate complaint list
+                        complaintList = DBHandler.querySnapshotToList(querySnapshot, Complaint.class);
+                        // Build RecyclerView
+                        buildRecyclerView();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Log and toast failure
+                        Log.w(TAG, "Failed to load complaints.", e);
+                        String message = "Failed to load complaints. " + e.getMessage();
+                        Toast.makeText(AdminHomeActivity.this, message, Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
-    public void populateRecyclerView() {
+    // Builds RecyclerView if complaints list is non-emtpy
+    public void buildRecyclerView() {
+        // Check if complaint list is empty, if so -> toast -> return
+        if (complaintList.isEmpty()) {
+            Toast.makeText(AdminHomeActivity.this, "There are no complaints!", Toast.LENGTH_SHORT).show();
+            return;
+        }
         // Get RV
-        complaintRecyclerView = findViewById(R.id.recyclerViewComplaints);
+        RecyclerView complaintRecyclerView = findViewById(R.id.recyclerViewComplaints);
         // Create layout manager -> pass activity
-        complaintLayoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager complaintLayoutManager = new LinearLayoutManager(this);
         // Create adapter -> pass complaint list
-        complaintAdapter = new ComplaintAdapter(complaintList);
+        ComplaintAdapter complaintAdapter = new ComplaintAdapter(complaintList);
         // Set layout
         complaintRecyclerView.setLayoutManager(complaintLayoutManager);
         // Set adapter
