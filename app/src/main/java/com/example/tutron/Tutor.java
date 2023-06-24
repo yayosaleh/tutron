@@ -3,6 +3,8 @@
 package com.example.tutron;
 
 public class Tutor extends User {
+
+    public static final String INDEF_SUSPENSION = "INDEF";
     private String educationLevel;
     private String nativeLanguage;
     private String description;
