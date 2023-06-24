@@ -92,7 +92,7 @@ public class TutorHomeActivity extends AppCompatActivity {
 
         // Return if tutor is no longer suspended
         if (!suspensionExpiry.equals(Tutor.INDEF_SUSPENSION) &&
-                DateTimeHandler.isInPast(
+                DateTimeHandler.isInPastOrPresent(
                         DateTimeHandler.stringToDate(suspensionExpiry))) return;
 
         // Formulate suspension message

@@ -27,8 +27,8 @@ public class DateTimeHandler {
         return LocalDate.parse(dateString, formatter);
     }
 
-    // Returns true if provided date is in the past or is today
-    public static boolean isInPast(LocalDate date) {
+    // Returns true if provided date is in the past or is current date
+    public static boolean isInPastOrPresent(LocalDate date) {
         LocalDate currentDate = LocalDate.now();
         int comparison = date.compareTo(currentDate);
         return comparison <= 0;
