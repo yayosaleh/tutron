@@ -3,10 +3,13 @@
 package com.example.tutron;
 
 public class Tutor extends User {
+
+    public static final String INDEF_SUSPENSION = "INDEF";
     private String educationLevel;
     private String nativeLanguage;
     private String description;
     private String profilePic;
+    private String suspensionExpiry; // Should be null by default
 
     // Constructors
 
@@ -14,8 +17,8 @@ public class Tutor extends User {
         //public no-arg constructor needed to create Firestore documents
     }
 
-    public Tutor(String firstName, String lastName, String educationLevel, String nativeLanguage, String description, String profilePic) {
-        super(firstName, lastName);
+    public Tutor(String id, String firstName, String lastName, String educationLevel, String nativeLanguage, String description, String profilePic) {
+        super(id, firstName, lastName);
         this.educationLevel = educationLevel;
         this.nativeLanguage = nativeLanguage;
         this.description = description;
@@ -54,5 +57,12 @@ public class Tutor extends User {
 
     public void setProfilePic(String profilePic) {
         this.profilePic = profilePic;
+    }
+
+    public String getSuspensionExpiry() {
+        return suspensionExpiry;
+    }
+    public void setSuspensionExpiry(String suspensionExpiry) {
+        this.suspensionExpiry = suspensionExpiry;
     }
 }

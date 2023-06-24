@@ -1,5 +1,6 @@
 package com.example.tutron;
 
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.EditText;
@@ -21,6 +22,11 @@ public class RegistrationUtil {
     private static final String TAG = "RegistrationUtil";
     private static final String STUDENT_COLLECTION = "students";
     private static final String TUTOR_COLLECTION = "tutors";
+    private static final Class<?> STUDENT_HOME_ACTIVITY = StudentHomeActivity.class;
+    private static final Class<?> TUTOR_HOME_ACTIVITY = TutorHomeActivity.class;
+
+    // Access shared FirebaseAuth instance
+    private static final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     // Returns true if all text inputs are filled
     public static boolean validTextInputs(ArrayList<EditText> editTexts){
@@ -33,10 +39,7 @@ public class RegistrationUtil {
 
     // Attempts to create account with given credentials and sign user in (Firebase)
     // Calls createStudentOrTutor() if successful
-    public static void createAccount(String email, String password, Student student, Tutor tutor, android.content.Context context){
-        // Access shared FirebaseAuth instance
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-
+    public static void createAccount(String email, String password, Student student, Tutor tutor, Context context){
         // Account creation is async., operations must be done inside OnCompleteListener
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -47,7 +50,7 @@ public class RegistrationUtil {
                             // Current user can be accessed app-wide using shared FirebaseAuth instance
 
                             // Log success
-                            Log.d(TAG, "createUser:success");
+                            Log.d(TAG, "createAccount:success");
 
                             // Call student/tutor creation method
                             RegistrationUtil.createStudentOrTutor(student, tutor, context);
@@ -56,7 +59,7 @@ public class RegistrationUtil {
                             // Account creation failed
 
                             // Log failure
-                            Log.w(TAG, "createUser:failure", task.getException());
+                            Log.w(TAG, "createAccount:failure", task.getException());
 
                             // Create toast with cause of failure
                             String failureMessage = (task.getException() != null)?
@@ -69,11 +72,8 @@ public class RegistrationUtil {
 
     // Attempts to create Student or Tutor document (Firestore)
     // One of the user types is always null
-    // Navigates to WelcomeActivity if successful
-    public static void createStudentOrTutor(Student student, Tutor tutor, android.content.Context context){
-        // Access shared FirebaseAuth instance
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-
+    // Navigates to appropriate home activity if successful
+    public static void createStudentOrTutor(Student student, Tutor tutor, Context context){
         // Ensure current user is logged in
         FirebaseUser user = mAuth.getCurrentUser();
         if (user == null){
@@ -90,6 +90,8 @@ public class RegistrationUtil {
         // Creating collections and documents in Firestore is implicit!
         // Select which document to create based on nullness of student or tutor
         if (student != null){
+            // Set student id
+            student.setId(userID);
             db.collection(STUDENT_COLLECTION).document(userID).set(student)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -97,8 +99,8 @@ public class RegistrationUtil {
                             // Create toast to mark success
                             Toast.makeText(context, "Student registered!", Toast.LENGTH_SHORT).show();
 
-                            // Navigate to welcome page
-                            Intent intent = new Intent(context, WelcomeActivity.class);
+                            // Navigate to student home activity
+                            Intent intent = new Intent(context, STUDENT_HOME_ACTIVITY);
                             context.startActivity(intent);
                         }
                     })
@@ -111,6 +113,8 @@ public class RegistrationUtil {
                         }
                     });
         } else {
+            // Set tutor id
+            tutor.setId(userID);
             db.collection(TUTOR_COLLECTION).document(userID).set(tutor)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -118,8 +122,8 @@ public class RegistrationUtil {
                             // Create toast to mark success
                             Toast.makeText(context, "Tutor registered!", Toast.LENGTH_SHORT).show();
 
-                            // Navigate to welcome page
-                            Intent intent = new Intent(context, WelcomeActivity.class);
+                            // Navigate to tutor home activity
+                            Intent intent = new Intent(context, TUTOR_HOME_ACTIVITY);
                             context.startActivity(intent);
                         }
                     })
