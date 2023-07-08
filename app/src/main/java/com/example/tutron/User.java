@@ -3,9 +3,9 @@
 package com.example.tutron;
 
 public class User {
-    private String id;
-    private String firstName;
-    private String lastName;
+    protected String id;
+    protected String firstName;
+    protected String lastName;
 
     // Constructors
 
