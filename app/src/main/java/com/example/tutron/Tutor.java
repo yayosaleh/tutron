@@ -2,6 +2,8 @@
 
 package com.example.tutron;
 
+import java.util.ArrayList;
+
 public class Tutor extends User {
 
     public static final String INDEF_SUSPENSION = "INDEF";
@@ -10,6 +12,7 @@ public class Tutor extends User {
     private String description;
     private String profilePic;
     private String suspensionExpiry; // Should be null by default
+    private ArrayList<String> offeredTopicNames; // Should be null by default (always set, never added to or removed from)
 
     // Constructors
 
@@ -64,5 +67,11 @@ public class Tutor extends User {
     }
     public void setSuspensionExpiry(String suspensionExpiry) {
         this.suspensionExpiry = suspensionExpiry;
+    }
+    public ArrayList<String> getOfferedTopicNames() {
+        return offeredTopicNames;
+    }
+    public void setOfferedTopicNames(ArrayList<String> offeredTopicNames) {
+        this.offeredTopicNames = offeredTopicNames;
     }
 }
