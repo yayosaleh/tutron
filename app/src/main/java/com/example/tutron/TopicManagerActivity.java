@@ -7,14 +7,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+
 public class TopicManagerActivity extends AppCompatActivity {
 
     private static final Class<?>  BACK_NAV_DEST = TutorProfileActivity.class;
     private static final Class<?> ADD_TOPIC_DEST = TopicAdderActivity.class;
-    private static final int MAX_TOPICS = 20;
-    private static final int MAX_OFFERED_TOPICS = 5;
+    private static final int MAX_NUM_OFFERED_TOPICS = 5;
 
     private Tutor currentTutor;
+    // TODO DON'T CONSTRUCT ARRAYS HERE!
+    private ArrayList<Topic> topics = new ArrayList<>();
+    private ArrayList<Topic> offeredTopics = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +37,7 @@ public class TopicManagerActivity extends AppCompatActivity {
         btnBackNav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Must send current tutor back; may have been updated
+                // Must send current tutor back to repopulate intent
                 Intent intent = new Intent(TopicManagerActivity.this, BACK_NAV_DEST);
                 intent.putExtra("Current Tutor", currentTutor);
                 startActivity(intent);
@@ -43,9 +47,11 @@ public class TopicManagerActivity extends AppCompatActivity {
         btnAddTopicNav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Must send tutor id; required to create a topic instance
+                // Must send current tutor to repopulate intent upon back navigation (and to access id)
+                // Must send current number of topics to limit number of topics added
                 Intent intent = new Intent(TopicManagerActivity.this, ADD_TOPIC_DEST);
-                intent.putExtra("Tutor ID", currentTutor.getId());
+                intent.putExtra("Current Tutor", currentTutor);
+                intent.putExtra("Number of Topics", topics.size());
                 startActivity(intent);
             }
         });
