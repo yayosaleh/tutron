@@ -57,4 +57,8 @@
     <string name="topic_name">Topic Name</string>
     <string name="topic_years_of_experience">Topic Years Of Experience</string>
     <string name="topic_description">Topic Description</string>
+    <string name="add_a_topic_to_your_profile">Add a topic to your profile!</string>
+    <string name="topic_name_lower_case">Topic name</string>
+    <string name="years_of_experience">Years of experience</string>
+    <string name="describe_your_experience">Describe your experience</string>
 </resources>
