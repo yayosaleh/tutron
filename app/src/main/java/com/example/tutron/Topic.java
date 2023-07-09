@@ -1,6 +1,6 @@
 package com.example.tutron;
 
-public class Topic {
+public class Topic implements Identifiable {
     private String id;
     private String tutorId;
     private String name;

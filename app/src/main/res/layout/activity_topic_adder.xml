@@ -70,6 +70,8 @@
         android:gravity="start|top"
         android:hint="@string/describe_your_experience"
         android:inputType="textMultiLine"
+        android:maxLength="600"
+        android:maxLines="5"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

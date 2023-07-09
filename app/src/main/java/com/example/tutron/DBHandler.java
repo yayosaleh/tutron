@@ -7,6 +7,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -29,19 +31,33 @@ public class DBHandler {
     // GENERIC OPERATIONS //
 
     // Sets (i.e., creates or updates) Firestore document with specified id within specified collection
-    public static <T> void setDocument(String documentId, String collectionId, T data, SetDocumentCallback callback) {
+    public static <T extends Identifiable> void setDocument(String documentId, @NonNull String collectionId, @NonNull T data, SetDocumentCallback callback) {
         // Access shared Firestore database instance
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+        // If documentId is null, this is a document creation operation
+        // In this case, we must create a doc ref with an auto-generated id and set the passed object's id
+        CollectionReference collectionRef = db.collection(collectionId);
+        DocumentReference docRef;
+
+        if (documentId == null) {
+            // Create reference with auto-generated id using document() with no arg.
+            docRef = collectionRef.document();
+            // Set id of passed object
+            data.setId(docRef.getId());
+        } else {
+            docRef = collectionRef.document(documentId);
+        }
+
         // Attempt to set document
-        db.collection(collectionId).document(documentId).set(data)
+        docRef.set(data)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         // Log success
                         Log.d(TAG, "setDocument:success");
                         // Invoke success callback
-                        callback.onSuccess();
+                        if (callback != null) callback.onSuccess();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -50,7 +66,7 @@ public class DBHandler {
                         // Log failure
                         Log.w(TAG, "setDocument:failure", e);
                         // Invoke failure callback
-                        callback.onFailure(e);
+                        if (callback != null) callback.onFailure(e);
                     }
                 });
     }

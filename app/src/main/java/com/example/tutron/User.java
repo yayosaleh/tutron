@@ -2,7 +2,7 @@
 
 package com.example.tutron;
 
-public class User {
+public class User implements Identifiable {
     protected String id;
     protected String firstName;
     protected String lastName;
