@@ -20,6 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class TutorHomeActivity extends AppCompatActivity {
     private static final String TAG = "TutorHomeActivity";
+    private static final Class<?> UNSUSPENDED_DEST = TutorProfileActivity.class;
     private Tutor currentTutor;
 
     @Override
@@ -83,12 +84,17 @@ public class TutorHomeActivity extends AppCompatActivity {
                 });
     }
 
-    // Checks suspension status and change text view accordingly
+    // Checks suspension status and navigates or changes text view accordingly
     private void checkSuspensionStatus() {
         String suspensionExpiry = currentTutor.getSuspensionExpiry();
 
-        // Return if tutor is not suspended
-        if (suspensionExpiry == null) return;
+        // Navigate to TutorProfileActivity if tutor is not suspended (and return)
+        if (suspensionExpiry == null) {
+            Intent intent = new Intent(TutorHomeActivity.this, UNSUSPENDED_DEST);
+            intent.putExtra("Current Tutor", currentTutor);
+            startActivity(intent);
+            return;
+        }
 
         // Return if tutor is no longer suspended
         if (!suspensionExpiry.equals(Tutor.INDEF_SUSPENSION) &&

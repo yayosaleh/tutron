@@ -49,4 +49,17 @@
     <string name="back">Back</string>
     <string name="days"># days</string>
     <string name="suspend_tutor">Suspend Tutor</string>
+    <string name="manage_topics">Manage Topics</string>
+    <string name="topics">Topics</string>
+    <string name="add_topic">Add Topic</string>
+    <string name="tap_to_start_stop_offering_a_topic_swipe_left_to_delete_a_topic">Tap to start/stop offering a topic. Swipe left to delete a topic.</string>
+    <string name="topic_offering_status">Topic Offering Status</string>
+    <string name="topic_name">Topic Name</string>
+    <string name="topic_years_of_experience">Topic Years Of Experience</string>
+    <string name="topic_description">Topic Description</string>
+    <string name="add_a_topic_to_your_profile">Add a topic to your profile!</string>
+    <string name="topic_name_lower_case">Topic name</string>
+    <string name="years_of_experience">Years of experience</string>
+    <string name="describe_your_experience">Describe your experience</string>
+    <string name="offered">OFFERED</string>
 </resources>

@@ -2,7 +2,12 @@
 
 package com.example.tutron;
 
-public class Tutor extends User {
+import android.os.Parcel;
+import android.os.Parcelable;
+import androidx.annotation.NonNull;
+import java.util.ArrayList;
+
+public class Tutor extends User implements Parcelable {
 
     public static final String INDEF_SUSPENSION = "INDEF";
     private String educationLevel;
@@ -10,6 +15,7 @@ public class Tutor extends User {
     private String description;
     private String profilePic;
     private String suspensionExpiry; // Should be null by default
+    private ArrayList<String> offeredTopicNames; // Should be null by default (always set, never added to or removed from)
 
     // Constructors
 
@@ -26,7 +32,6 @@ public class Tutor extends User {
     }
 
     // Getter and setter methods
-
     public String getEducationLevel() {
         return educationLevel;
     }
@@ -64,5 +69,55 @@ public class Tutor extends User {
     }
     public void setSuspensionExpiry(String suspensionExpiry) {
         this.suspensionExpiry = suspensionExpiry;
+    }
+    public ArrayList<String> getOfferedTopicNames() {
+        return offeredTopicNames;
+    }
+    public void setOfferedTopicNames(ArrayList<String> offeredTopicNames) {
+        this.offeredTopicNames = offeredTopicNames;
+    }
+
+    // Parcelable constructor and methods
+
+    protected Tutor(Parcel in) {
+        id = in.readString();
+        firstName = in.readString();
+        lastName = in.readString();
+        educationLevel = in.readString();
+        nativeLanguage = in.readString();
+        description = in.readString();
+        profilePic = in.readString();
+        suspensionExpiry = in.readString();
+        offeredTopicNames = in.createStringArrayList();
+    }
+
+    public static final Creator<Tutor> CREATOR = new Creator<Tutor>() {
+        @Override
+        public Tutor createFromParcel(Parcel in) {
+            return new Tutor(in);
+        }
+
+        @Override
+        public Tutor[] newArray(int size) {
+            return new Tutor[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(firstName);
+        dest.writeString(lastName);
+        dest.writeString(educationLevel);
+        dest.writeString(nativeLanguage);
+        dest.writeString(description);
+        dest.writeString(profilePic);
+        dest.writeString(suspensionExpiry);
+        dest.writeStringList(offeredTopicNames);
     }
 }
