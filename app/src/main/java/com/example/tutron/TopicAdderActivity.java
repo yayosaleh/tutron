@@ -64,9 +64,11 @@ public class TopicAdderActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Check current number of topics does not exceed max
                 if (numTopics == MAX_NUM_TOPICS) {
-                    String message = "You've added the maximum number of topics (" + MAX_NUM_TOPICS + ")! " +
-                            "Delete a topic to add new one!";
-                    Toast.makeText(TopicAdderActivity.this, message, Toast.LENGTH_SHORT).show();
+                    String message1, message2;
+                    message1 = "You've already added the maximum number of topics (" + MAX_NUM_TOPICS + ")!";
+                    message2 = "Delete a topic to add a new one!";
+                    Toast.makeText(TopicAdderActivity.this, message1, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TopicAdderActivity.this, message2, Toast.LENGTH_SHORT).show();
                     return;
                 }
 

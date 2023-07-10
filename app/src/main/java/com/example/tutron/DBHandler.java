@@ -22,7 +22,7 @@ public class DBHandler {
     public static final String COMPLAINT_COLLECTION = "complaints";
     private static final String TUTOR_SUSPENSION_EXPIRY_KEY = "suspensionExpiry";
 
-    // Interface allows front-end callers to perform operations upon successful or failed document-setting
+    // Interface allows front-end callers to perform operations upon successful or failed document-setting (or deletion)
     public interface SetDocumentCallback {
         void onSuccess(); // Called when a document is successfully set
         void onFailure(Exception e); // Called upon failure to set document
@@ -31,6 +31,7 @@ public class DBHandler {
     // GENERIC OPERATIONS //
 
     // Sets (i.e., creates or updates) Firestore document with specified id within specified collection
+    // Invokes callback methods if given
     public static <T extends Identifiable> void setDocument(String documentId, @NonNull String collectionId, @NonNull T data, SetDocumentCallback callback) {
         // Access shared Firestore database instance
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -65,6 +66,34 @@ public class DBHandler {
                     public void onFailure(@NonNull Exception e) {
                         // Log failure
                         Log.w(TAG, "setDocument:failure", e);
+                        // Invoke failure callback
+                        if (callback != null) callback.onFailure(e);
+                    }
+                });
+    }
+
+    // Deletes Firestore document with specified id within specified collection
+    // Invokes callback methods if given
+    public static void deleteDocument(@NonNull String documentId, @NonNull String collectionId, SetDocumentCallback callback) {
+        // Access shared Firestore database instance
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        // Attempt to delete document
+        db.collection(collectionId).document(documentId).delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        // Log success
+                        Log.d(TAG, "deleteDocument:success");
+                        // Invoke success callback
+                        if (callback != null) callback.onSuccess();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Log failure
+                        Log.w(TAG, "deleteDocument:failure", e);
                         // Invoke failure callback
                         if (callback != null) callback.onFailure(e);
                     }
