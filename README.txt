@@ -26,5 +26,9 @@ Tutor 3:
 
 ***General Notes***
 
-- Unit test performed in DateTimeHandlerUnitTest class (dir path: app/src/test/java/com/example/tutron)
+D2:
+- Unit test performed in app/src/test/java/com/example/tutron/DateTimeHandlerUnitTest.java
 - See TutorHomeActivity.checkSuspensionStatus() to see how tutor suspension logic works
+
+D3:
+- Unit test performed in app/src/test/java/com/example/tutron/StringCapitalizerUnitTest.java
