@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,14 +14,17 @@ public class TutorProfileActivity extends AppCompatActivity {
     private static final Class<?> MANAGE_TOPICS_DEST = TopicManagerActivity.class;
     private Tutor currentTutor;
 
+    private void updateCurrentTutor() {
+        currentTutor = DataManager.getInstance().getCurrentTutor();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutor_profile);
 
-        // Get current tutor passed via intent
-        Intent intent = getIntent();
-        currentTutor = intent.getParcelableExtra("Current Tutor");
+        // Get current tutor
+        updateCurrentTutor();
 
         // Declare and initialize view variables
         TextView textViewWelcomeMessage = findViewById(R.id.textViewTutorProfileWelcomeMessage);
@@ -45,9 +49,22 @@ public class TutorProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TutorProfileActivity.this, MANAGE_TOPICS_DEST);
-                intent.putExtra("Current Tutor", currentTutor);
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // Update current tutor (needed for back navigation)
+        updateCurrentTutor();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Set current tutor for use by downstream activities
+        DataManager.getInstance().setCurrentTutor(currentTutor);
     }
 }
