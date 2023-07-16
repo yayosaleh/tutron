@@ -4,7 +4,10 @@ package com.example.tutron;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import androidx.annotation.NonNull;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -47,7 +50,14 @@ public class Tutor extends User implements Parcelable {
     }
 
     public Tutor copy() {
-        return new Tutor(this.id, this.firstName, this.lastName, this.educationLevel, this.nativeLanguage, this.description, this.profilePic);
+        Tutor copy = new Tutor(this.id, this.firstName, this.lastName, this.educationLevel, this.nativeLanguage, this.description, this.profilePic);
+        copy.setSuspensionExpiry(this.suspensionExpiry);
+        copy.setOfferedTopicNames(this.offeredTopicNames);
+        copy.setHourlyRate(this.hourlyRate);
+        copy.setNumLessonsGiven(this.numLessonsGiven);
+        copy.setNumRatings(this.numRatings);
+        copy.setAvgRating(this.avgRating);
+        return copy;
     }
 
     // Getter and setter methods
@@ -183,4 +193,27 @@ public class Tutor extends User implements Parcelable {
             return new Tutor[size];
         }
     };
+
+    // Binds current Tutor instance to reusable tutor_item layout view
+    public void bindToView(View view) {
+        ImageView imageViewTutorItemProfile = view.findViewById(R.id.imageViewTutorItemProfile);
+        TextView textViewTutorItemName = view.findViewById(R.id.textViewTutorItemName);
+        TextView textViewTutorItemRating = view.findViewById(R.id.textViewTutorItemRating);
+        TextView textViewTutorItemEducation = view.findViewById(R.id.textViewTutorItemEducation);
+        TextView textViewTutorItemLanguage = view.findViewById(R.id.textViewTutorItemLanguage);
+        TextView textViewTutorItemDescription = view.findViewById(R.id.textViewTutorItemDescription);
+
+        imageViewTutorItemProfile.setImageResource(profilePic);
+        textViewTutorItemName.setText(firstName + " " + lastName);
+        textViewTutorItemRating.setText(String.format("⭐%.1f ⋅ %d lessons given", avgRating, numLessonsGiven));
+        textViewTutorItemEducation.setText(String.format("\uD83C\uDF93%s", educationLevel));
+        textViewTutorItemLanguage.setText(String.format("\uD83D\uDDE3%s", nativeLanguage));
+        textViewTutorItemDescription.setText(description);
+
+        textViewTutorItemName.setVisibility((firstName.isEmpty() || lastName.isEmpty()) ? View.GONE : View.VISIBLE);
+        textViewTutorItemRating.setVisibility((avgRating < 0 || numLessonsGiven < 0) ? View.GONE : View.VISIBLE);
+        textViewTutorItemEducation.setVisibility(educationLevel.isEmpty() ? View.GONE : View.VISIBLE);
+        textViewTutorItemLanguage.setVisibility(nativeLanguage.isEmpty() ? View.GONE : View.VISIBLE);
+        textViewTutorItemDescription.setVisibility(description.isEmpty() ? View.GONE : View.VISIBLE);
+    }
 }

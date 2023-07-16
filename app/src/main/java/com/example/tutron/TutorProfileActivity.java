@@ -25,14 +25,11 @@ public class TutorProfileActivity extends AppCompatActivity {
         updateCurrentTutor();
 
         // Declare and initialize view variables
-        TextView textViewWelcomeMessage = findViewById(R.id.textViewTutorProfileName);
         Button btnLogOff = findViewById(R.id.btnTutorProfileLogOff);
         Button btnManageTopics = findViewById(R.id.btnManageTopics);
-
-        // Set welcome message text view
-        String welcomeMessage = "Welcome, " + currentTutor.getFirstName() +
-                " " + currentTutor.getLastName() + "!";
-        textViewWelcomeMessage.setText(welcomeMessage);
+        // Bind current tutor to reusable tutor item view
+        View tutorItemView = findViewById(R.id.tutorItem);
+        currentTutor.bindToView(tutorItemView);
 
         // Set on click listeners for log off and manage topics buttons
         btnLogOff.setOnClickListener(new View.OnClickListener() {

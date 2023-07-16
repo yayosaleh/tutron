@@ -62,4 +62,11 @@
     <string name="years_of_experience">Years of experience</string>
     <string name="describe_your_experience">Describe your experience</string>
     <string name="offered">OFFERED</string>
+    <string name="tutor_item_name">Tutor Name</string>
+    <string name="rating_and_number_of_lessons_given">Rating and Number of Lessons Given</string>
+    <string name="tutor_item_education_level">Education Level</string>
+    <string name="tutor_item_native_language">Native Language</string>
+    <string name="tutor_item_description">Description</string>
+    <string name="update_hourly_rate">Update Hourly Rate</string>
+    <string name="rate">Rate ($)</string>
 </resources>

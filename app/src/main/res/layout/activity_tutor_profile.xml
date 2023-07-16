@@ -20,68 +20,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <include
+        android:id="@+id/tutorItem"
+        layout="@layout/tutor_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnTutorProfileLogOff" />
+
     <Button
         android:id="@+id/btnManageTopics"
         style="@style/Widget.AppCompat.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:text="@string/manage_topics"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnUpdateHourlyRate" />
-
-    <TextView
-        android:id="@+id/textViewTutorProfileName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="@string/welcome_tutor"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewTutorProfilePic" />
-
-    <ImageView
-        android:id="@+id/imageViewTutorProfilePic"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnTutorProfileLogOff"
-        app:srcCompat="@drawable/albert_einstein" />
-
-    <TextView
-        android:id="@+id/textViewTutorProfileRatingAndNumLessonsGiven"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="Rating And Number of Lessons"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTutorProfileName" />
-
-    <TextView
-        android:id="@+id/TutorProfileEducationLevelAndNativeLanguage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="Education Level And Native Langauge"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTutorProfileRatingAndNumLessonsGiven" />
-
-    <TextView
-        android:id="@+id/textViewTutorProfileDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:maxLines="2"
-        android:text="Description"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TutorProfileEducationLevelAndNativeLanguage" />
 
     <Button
         android:id="@+id/btnUpdateHourlyRate"
@@ -90,9 +50,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="30dp"
-        android:text="Update Hrly Rate"
+        android:text="@string/update_hourly_rate"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTutorProfileDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/tutorItem" />
 
     <EditText
         android:id="@+id/editTextHourlyRate"
@@ -102,10 +62,10 @@
         android:layout_marginTop="15dp"
         android:layout_marginEnd="5dp"
         android:ems="10"
-        android:hint="Rate ($)"
+        android:hint="@string/rate"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toStartOf="@+id/btnUpdateHourlyRate"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTutorProfileDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/tutorItem" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
