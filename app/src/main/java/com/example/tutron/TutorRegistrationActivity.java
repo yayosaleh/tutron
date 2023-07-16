@@ -64,7 +64,7 @@ public class TutorRegistrationActivity extends AppCompatActivity {
                 String educationLevel = rBtnEducationLevel.getText().toString();
                 String nativeLanguage = rBtnNativeLanguage.getText().toString();
                 Tutor tutor = new Tutor(null, editTextFirstName.getText().toString(), editTextLastName.getText().toString(),
-                        educationLevel, nativeLanguage, editTextExperience.getText().toString(), null);
+                        educationLevel, nativeLanguage, editTextExperience.getText().toString(), 0);
 
                 // Attempt to create account and register tutor
                 RegistrationUtil.createAccount(editTextEmail.getText().toString(),

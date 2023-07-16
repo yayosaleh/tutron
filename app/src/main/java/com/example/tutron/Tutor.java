@@ -6,16 +6,28 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 public class Tutor extends User implements Parcelable {
 
     public static final String INDEF_SUSPENSION = "INDEF";
+    private static final List<Integer> PROFILE_PICTURES = Arrays.asList(
+            R.drawable.albert_einstein,
+            R.drawable.marie_curie,
+            R.drawable.isaac_newton
+    );
     private String educationLevel;
     private String nativeLanguage;
     private String description;
-    private String profilePic;
+    private int profilePic;
     private String suspensionExpiry; // Should be null by default
     private ArrayList<String> offeredTopicNames; // Should be null by default (always set, never added to or removed from)
+    private double hourlyRate = 0; // 0 by default
+    private int numLessonsGiven = 0; // 0 by default
+    private int numRatings = 0; // 0 by default
+    private double avgRating = 0; // 0 by default
 
     // Constructors
 
@@ -23,15 +35,23 @@ public class Tutor extends User implements Parcelable {
         //public no-arg constructor needed to create Firestore documents
     }
 
-    public Tutor(String id, String firstName, String lastName, String educationLevel, String nativeLanguage, String description, String profilePic) {
+    public Tutor(String id, String firstName, String lastName, String educationLevel, String nativeLanguage, String description, int profilePic) {
         super(id, firstName, lastName);
         this.educationLevel = educationLevel;
         this.nativeLanguage = nativeLanguage;
         this.description = description;
-        this.profilePic = profilePic;
+
+        // Assign random profile picture
+        Random random = new Random();
+        this.profilePic = PROFILE_PICTURES.get(random.nextInt(PROFILE_PICTURES.size()));
+    }
+
+    public Tutor copy() {
+        return new Tutor(this.id, this.firstName, this.lastName, this.educationLevel, this.nativeLanguage, this.description, this.profilePic);
     }
 
     // Getter and setter methods
+
     public String getEducationLevel() {
         return educationLevel;
     }
@@ -56,25 +76,60 @@ public class Tutor extends User implements Parcelable {
         this.description = description;
     }
 
-    public String getProfilePic() {
+    public int getProfilePic() {
         return profilePic;
     }
 
-    public void setProfilePic(String profilePic) {
+    public void setProfilePic(int profilePic) {
         this.profilePic = profilePic;
     }
 
     public String getSuspensionExpiry() {
         return suspensionExpiry;
     }
+
     public void setSuspensionExpiry(String suspensionExpiry) {
         this.suspensionExpiry = suspensionExpiry;
     }
+
     public ArrayList<String> getOfferedTopicNames() {
         return offeredTopicNames;
     }
+
     public void setOfferedTopicNames(ArrayList<String> offeredTopicNames) {
         this.offeredTopicNames = offeredTopicNames;
+    }
+
+    public double getHourlyRate() {
+        return hourlyRate;
+    }
+
+    public void setHourlyRate(double hourlyRate) {
+        this.hourlyRate = hourlyRate;
+    }
+
+    public int getNumLessonsGiven() {
+        return numLessonsGiven;
+    }
+
+    public void setNumLessonsGiven(int numLessonsGiven) {
+        this.numLessonsGiven = numLessonsGiven;
+    }
+
+    public int getNumRatings() {
+        return numRatings;
+    }
+
+    public void setNumRatings(int numRatings) {
+        this.numRatings = numRatings;
+    }
+
+    public double getAvgRating() {
+        return avgRating;
+    }
+
+    public void setAvgRating(double avgRating) {
+        this.avgRating = avgRating;
     }
 
     // Parcelable constructor and methods
@@ -86,9 +141,35 @@ public class Tutor extends User implements Parcelable {
         educationLevel = in.readString();
         nativeLanguage = in.readString();
         description = in.readString();
-        profilePic = in.readString();
+        profilePic = in.readInt();
         suspensionExpiry = in.readString();
         offeredTopicNames = in.createStringArrayList();
+        hourlyRate = in.readDouble();
+        numLessonsGiven = in.readInt();
+        numRatings = in.readInt();
+        avgRating = in.readDouble();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(firstName);
+        dest.writeString(lastName);
+        dest.writeString(educationLevel);
+        dest.writeString(nativeLanguage);
+        dest.writeString(description);
+        dest.writeInt(profilePic);
+        dest.writeString(suspensionExpiry);
+        dest.writeStringList(offeredTopicNames);
+        dest.writeDouble(hourlyRate);
+        dest.writeInt(numLessonsGiven);
+        dest.writeInt(numRatings);
+        dest.writeDouble(avgRating);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<Tutor> CREATOR = new Creator<Tutor>() {
@@ -102,22 +183,4 @@ public class Tutor extends User implements Parcelable {
             return new Tutor[size];
         }
     };
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(@NonNull Parcel dest, int flags) {
-        dest.writeString(id);
-        dest.writeString(firstName);
-        dest.writeString(lastName);
-        dest.writeString(educationLevel);
-        dest.writeString(nativeLanguage);
-        dest.writeString(description);
-        dest.writeString(profilePic);
-        dest.writeString(suspensionExpiry);
-        dest.writeStringList(offeredTopicNames);
-    }
 }
