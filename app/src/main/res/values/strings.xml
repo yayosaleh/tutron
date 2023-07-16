@@ -77,4 +77,11 @@
     <string name="set_end_time">Set End Time</string>
     <string name="add_time_slot">Add Time Slot</string>
     <string name="hourly_rate">Hourly Rate</string>
+    <string name="search_for_tutors">Search For Tutors</string>
+    <string name="fill_in_one_or_more_of_the_following_fields">Fill in one or more of the following fields.</string>
+    <string name="language">Language</string>
+    <string name="topic_name_search">Topic Name</string>
+    <string name="search">Search</string>
+    <string name="tutors">Tutors</string>
+    <string name="tap_on_a_tutor_to_view_profile_and_request_lesson">Tap on a tutor to view profile and request lesson!</string>
 </resources>
