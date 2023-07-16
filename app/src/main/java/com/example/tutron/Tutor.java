@@ -51,6 +51,7 @@ public class Tutor extends User implements Parcelable {
 
     public Tutor copy() {
         Tutor copy = new Tutor(this.id, this.firstName, this.lastName, this.educationLevel, this.nativeLanguage, this.description, this.profilePic);
+        copy.setProfilePic(this.profilePic); // Since constructor ignores profilePic arg
         copy.setSuspensionExpiry(this.suspensionExpiry);
         copy.setOfferedTopicNames(this.offeredTopicNames);
         copy.setHourlyRate(this.hourlyRate);
@@ -201,6 +202,7 @@ public class Tutor extends User implements Parcelable {
         TextView textViewTutorItemRating = view.findViewById(R.id.textViewTutorItemRating);
         TextView textViewTutorItemEducation = view.findViewById(R.id.textViewTutorItemEducation);
         TextView textViewTutorItemLanguage = view.findViewById(R.id.textViewTutorItemLanguage);
+        TextView textViewTutorItemHourlyRate = view.findViewById(R.id.textViewTutorItemHourlyRate);
         TextView textViewTutorItemDescription = view.findViewById(R.id.textViewTutorItemDescription);
 
         imageViewTutorItemProfile.setImageResource(profilePic);
@@ -208,10 +210,12 @@ public class Tutor extends User implements Parcelable {
         textViewTutorItemRating.setText(String.format("⭐%.1f ⋅ %d lessons given", avgRating, numLessonsGiven));
         textViewTutorItemEducation.setText(String.format("\uD83C\uDF93%s", educationLevel));
         textViewTutorItemLanguage.setText(String.format("\uD83D\uDDE3%s", nativeLanguage));
+        textViewTutorItemHourlyRate.setText(String.format("\uD83D\uDCB2%.1f per hour", hourlyRate));
         textViewTutorItemDescription.setText(description);
 
         textViewTutorItemName.setVisibility((firstName.isEmpty() || lastName.isEmpty()) ? View.GONE : View.VISIBLE);
         textViewTutorItemRating.setVisibility((avgRating < 0 || numLessonsGiven < 0) ? View.GONE : View.VISIBLE);
+        textViewTutorItemHourlyRate.setVisibility((hourlyRate < 0) ? View.GONE : View.VISIBLE);
         textViewTutorItemEducation.setVisibility(educationLevel.isEmpty() ? View.GONE : View.VISIBLE);
         textViewTutorItemLanguage.setVisibility(nativeLanguage.isEmpty() ? View.GONE : View.VISIBLE);
         textViewTutorItemDescription.setVisibility(description.isEmpty() ? View.GONE : View.VISIBLE);

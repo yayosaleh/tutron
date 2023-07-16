@@ -69,4 +69,12 @@
     <string name="tutor_item_description">Description</string>
     <string name="update_hourly_rate">Update Hourly Rate</string>
     <string name="rate">Rate ($)</string>
+    <string name="rate_hr">Rate ($/hr)</string>
+    <string name="update_your_availability">Update Your Availability</string>
+    <string name="manage_lessons">Manage Lessons</string>
+    <string name="set_date">Set Date</string>
+    <string name="set_start_time">Set Start Time</string>
+    <string name="set_end_time">Set End Time</string>
+    <string name="add_time_slot">Add Time Slot</string>
+    <string name="hourly_rate">Hourly Rate</string>
 </resources>

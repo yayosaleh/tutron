@@ -297,9 +297,7 @@ public class TopicManagerActivity extends AppCompatActivity {
         for (Topic topic : offeredTopicList) offeredTopicNames.add(topic.getName());
 
         // Copy current tutor and update list of offered topic names
-        Tutor currentTutorCopy = new Tutor(currentTutor.getId(), currentTutor.getFirstName(),
-                currentTutor.getLastName(), currentTutor.getEducationLevel(),
-                currentTutor.getNativeLanguage(), currentTutor.getDescription(), currentTutor.getProfilePic());
+        Tutor currentTutorCopy = currentTutor.copy();
         currentTutorCopy.setOfferedTopicNames(offeredTopicNames);
 
         // Attempt to update tutor document in DB
