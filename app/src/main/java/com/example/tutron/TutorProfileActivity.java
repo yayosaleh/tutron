@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -27,7 +25,7 @@ public class TutorProfileActivity extends AppCompatActivity {
         updateCurrentTutor();
 
         // Declare and initialize view variables
-        TextView textViewWelcomeMessage = findViewById(R.id.textViewTutorProfileWelcomeMessage);
+        TextView textViewWelcomeMessage = findViewById(R.id.textViewTutorProfileName);
         Button btnLogOff = findViewById(R.id.btnTutorProfileLogOff);
         Button btnManageTopics = findViewById(R.id.btnManageTopics);
 
