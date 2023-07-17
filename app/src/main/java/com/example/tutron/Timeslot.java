@@ -1,6 +1,10 @@
 package com.example.tutron;
 
+import androidx.annotation.NonNull;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class Timeslot implements Identifiable {
     private String id;
@@ -50,5 +54,21 @@ public class Timeslot implements Identifiable {
 
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
+    }
+
+    // To string method for display purposes
+    // Format: "<day of week>, <month> <day of month>, <start time>-<end time>"
+    @NonNull
+    public String toString() {
+        SimpleDateFormat dayOfWeekFormat = new SimpleDateFormat("EEEE", Locale.getDefault());
+        SimpleDateFormat monthAndDayFormat = new SimpleDateFormat("MMM d", Locale.getDefault());
+        SimpleDateFormat timeFormat = new SimpleDateFormat("h:mma", Locale.getDefault());
+
+        String dayOfWeek = dayOfWeekFormat.format(startTime);
+        String monthAndDay = monthAndDayFormat.format(startTime);
+        String startTimeFormatted = timeFormat.format(startTime);
+        String endTimeFormatted = timeFormat.format(endTime);
+
+        return String.format("%s, %s, %s-%s", dayOfWeek, monthAndDay, startTimeFormatted, endTimeFormatted);
     }
 }

@@ -84,4 +84,7 @@
     <string name="search">Search</string>
     <string name="tutors">Tutors</string>
     <string name="tap_on_a_tutor_to_view_profile_and_request_lesson">Tap on a tutor to view profile and request lesson!</string>
+    <string name="timeslot_description">Timeslot Description</string>
+    <string name="tap_on_a_topic_to_start_your_lesson_request">Tap on a topic to start your lesson request!</string>
+    <string name="tap_on_a_timeslot_to_request_a_lesson_at_that_time">Tap on a timeslot to request a lesson at that time.</string>
 </resources>
