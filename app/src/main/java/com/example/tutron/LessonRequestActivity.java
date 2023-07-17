@@ -71,6 +71,13 @@ public class LessonRequestActivity extends AppCompatActivity {
         DBHandler.performQuery(TIMESLOT_COLLECTION, Timeslot.class, conditions, new DBHandler.QueryCallback<Timeslot>() {
             @Override
             public void onSuccess(ArrayList<Timeslot> items) {
+                // If tutor has no timeslots, toast and return
+                if (items.isEmpty()) {
+                    Toast.makeText(LessonRequestActivity.this, "This tutor is not available at the moment.",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 // Build recycler view
                 timeslotList = items;
                 buildRecyclerView();

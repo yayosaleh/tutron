@@ -44,8 +44,26 @@ public class Lesson implements Parcelable, Identifiable {
         this.endTime = endTime;
     }
 
-    // Getters and setters
+    // Copy method
 
+    public Lesson copy() {
+        Lesson copy = new Lesson(
+                this.id,
+                this.tutorId,
+                this.studentId,
+                this.topicId,
+                this.timeslotId,
+                this.tutorName,
+                this.studentName,
+                this.topicName,
+                this.startTime,
+                this.endTime
+        );
+        copy.setStatus(this.status);
+        return copy;
+    }
+
+    // Getters and setters
 
     public String getId() {
         return id;
@@ -197,7 +215,7 @@ public class Lesson implements Parcelable, Identifiable {
             textViewStatus.setTextColor(Color.GRAY);
         } else if (status == 1) {
             textViewStatus.setText("ACCEPTED");
-            textViewStatus.setTextColor(Color.GREEN);
+            textViewStatus.setTextColor(Color.rgb(0,100,0));
         }
 
         if (tutorName.isEmpty()) textViewTutorName.setVisibility(View.GONE);

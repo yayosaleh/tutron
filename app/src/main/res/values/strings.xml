@@ -94,4 +94,6 @@
     <string name="studentX">Student:</string>
     <string name="topic">Topic:</string>
     <string name="time">Time:</string>
+    <string name="lessons">Lessons</string>
+    <string name="tap_on_pending_lesson_to_approve_it_swipe_left_to_reject_it">Tap on pending lesson to approve it, swipe left to reject it.</string>
 </resources>

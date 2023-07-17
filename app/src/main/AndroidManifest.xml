@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Tutron"
         tools:targetApi="31">
         <activity
+            android:name=".TutorLessonManagerActivity"
+            android:exported="false" />
+        <activity
             android:name=".LessonRequestActivity"
             android:exported="false" />
         <activity

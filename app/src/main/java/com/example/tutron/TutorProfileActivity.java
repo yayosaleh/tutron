@@ -27,6 +27,7 @@ import java.util.Locale;
 
 public class TutorProfileActivity extends AppCompatActivity {
     private static final Class<?> MANAGE_TOPICS_DEST = TopicManagerActivity.class;
+    private static final Class<?> MANAGE_LESSONS_DEST = TutorLessonManagerActivity.class;
     private static final String TIMESLOT_COLLECTION = "timeslots";
 
     private Tutor currentTutor;
@@ -125,13 +126,14 @@ public class TutorProfileActivity extends AppCompatActivity {
         // Initialize button variables
         Button btnLogOff = findViewById(R.id.btnTutorProfileLogOff);
         Button btnManageTopics = findViewById(R.id.btnManageTopics);
+        Button btnManageLessons = findViewById(R.id.btnTutorManageLessons);
         Button btnUpdateHourlyRate = findViewById((R.id.btnUpdateHourlyRate));
         btnSetDate = findViewById(R.id.btnSetDate);
         btnSetStartTime = findViewById(R.id.btnSetStartTime);
         btnSetEndTime = findViewById(R.id.btnSetEndTime);
         Button btnAddTimeSlot = findViewById(R.id.btnAddTimeSlot);
 
-        // Set on click listeners for log off and manage topics buttons
+        // Set on click listeners for log off, manage topics and manage lessons buttons
         btnLogOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,6 +146,14 @@ public class TutorProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TutorProfileActivity.this, MANAGE_TOPICS_DEST);
+                startActivity(intent);
+            }
+        });
+
+        btnManageLessons.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TutorProfileActivity.this, MANAGE_LESSONS_DEST);
                 startActivity(intent);
             }
         });
