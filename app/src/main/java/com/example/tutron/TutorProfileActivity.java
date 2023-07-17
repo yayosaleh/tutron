@@ -250,7 +250,7 @@ public class TutorProfileActivity extends AppCompatActivity {
                 }
 
                 // Check the proposed timeslot does not conflict with any of the preexistent timeslots
-                if (conflictsWithExistingTimeslots(startTime, endTime)) {
+                if (conflictsWithExistingTimeslots(timeslotList, startTime, endTime)) {
                     Toast.makeText(TutorProfileActivity.this,
                             "This timeslot conflicts with existing timeslot!", Toast.LENGTH_SHORT).show();
                     return;
@@ -318,12 +318,12 @@ public class TutorProfileActivity extends AppCompatActivity {
         });
     }
 
-    private boolean isValidTimeslot(Date startTime, Date endTime) {
+    public static boolean isValidTimeslot(Date startTime, Date endTime) {
         if (startTime == null || endTime == null) return false;
         return startTime.before(endTime);
     }
 
-    private boolean conflictsWithExistingTimeslots(Date startTime, Date endTime) {
+    public static boolean conflictsWithExistingTimeslots(ArrayList<Timeslot> timeslotList, Date startTime, Date endTime) {
         if (timeslotList != null) {
             for (Timeslot timeslot : timeslotList) {
                 if (timeslot.getStartTime().before(endTime) && timeslot.getEndTime().after(startTime)) {
