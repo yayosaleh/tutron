@@ -14,10 +14,12 @@ import android.widget.Toast;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class LessonRequestActivity extends AppCompatActivity {
     private static final Class<?> BACK_NAV_DEST = StudentHomeActivity.class;
     private static final String TIMESLOT_COLLECTION = "timeslots";
+    private static final String LESSON_COLLECTION = "lessons";
     private Student currentStudent;
     private Tutor selectedTutor;
     private Topic selectedTopic;
@@ -104,6 +106,43 @@ public class LessonRequestActivity extends AppCompatActivity {
         recyclerViewTimeslots.setLayoutManager(timeslotLayoutManager);
         // Set adapter
         recyclerViewTimeslots.setAdapter(timeslotAdapter);
-        // TODO: on item click listener that creates lesson
+        // Set on item click listener to create/request lesson
+        timeslotAdapter.setOnItemClickListener(new GenericRVAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                // Extract needed information from selected timeslot
+                Timeslot timeslot = timeslotList.get(position);
+                Date startTime = timeslot.getStartTime();
+                Date endTime = timeslot.getEndTime();
+
+                // Create lesson
+                Lesson lesson = new Lesson(
+                        null,
+                        selectedTutor.getId(),
+                        currentStudent.getId(),
+                        selectedTopic.getId(),
+                        timeslot.getId(),
+                        (selectedTutor.getFirstName() + " " + selectedTutor.getLastName()),
+                        (currentStudent.getFirstName() + " " + currentStudent.getLastName()),
+                        selectedTopic.getName(),
+                        startTime,
+                        endTime
+                );
+
+                // Attempt to create lesson document in DB
+                DBHandler.setDocument(null, LESSON_COLLECTION, lesson, new DBHandler.SetDocumentCallback() {
+                    @Override
+                    public void onSuccess() {
+                        // Toast success
+                        Toast.makeText(LessonRequestActivity.this, "Lesson requested!", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public void onFailure(Exception e) {
+                        // Toast failure
+                        Toast.makeText(LessonRequestActivity.this, "Failed to request lesson, please try again!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
     }
 }
