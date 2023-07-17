@@ -65,6 +65,7 @@ public class LessonRequestActivity extends AppCompatActivity {
         // Define query conditions
         ArrayList<DBHandler.QueryCondition> conditions = new ArrayList<>();
         conditions.add(new DBHandler.QueryCondition("tutorId", "==", selectedTutor.getId()));
+        conditions.add(new DBHandler.QueryCondition("endTime", ">", new Date())); // We only want to show timeslots in the future
         conditions.add(new DBHandler.QueryCondition("booked", "==", false));
 
         // Perform query

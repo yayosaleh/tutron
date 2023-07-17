@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class TutorLessonManagerActivity extends AppCompatActivity {
     private static final Class<?> BACK_NAV_DEST = TutorProfileActivity.class;
@@ -124,6 +125,13 @@ public class TutorLessonManagerActivity extends AppCompatActivity {
         lessonAdapter.setOnItemClickListener(new GenericRVAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
+                // If selected lesson is expired (pending and overdue) or completed, toast and return
+                if(lessonList.get(position).getEndTime().before(new Date())) {
+                    Toast.makeText(TutorLessonManagerActivity.this,
+                            "You can't accept an expired request or completed lesson!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 // If selected lesson is not pending, toast and return
                 if (lessonList.get(position).getStatus() != 0) {
                     Toast.makeText(TutorLessonManagerActivity.this,

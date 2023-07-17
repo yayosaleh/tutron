@@ -96,4 +96,14 @@
     <string name="time">Time:</string>
     <string name="lessons">Lessons</string>
     <string name="tap_on_pending_lesson_to_approve_it_swipe_left_to_reject_it">Tap on pending lesson to approve it, swipe left to reject it.</string>
+    <string name="anonymous">Anonymous</string>
+    <string name="creation_date">Creation Date</string>
+    <string name="topicX">Topic</string>
+    <string name="rating">Rating</string>
+    <string name="review_body">Review Body</string>
+    <string name="leave_a_review">Leave a review.</string>
+    <string name="rating_1_5">Rating (1-5)</string>
+    <string name="share_your_thoughts">Share your thoughts...</string>
+    <string name="submit_a_complaint">Submit a complaint.</string>
+    <string name="what_s_wrong">What\'s wrong...</string>
 </resources>

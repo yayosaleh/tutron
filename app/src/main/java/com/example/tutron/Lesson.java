@@ -207,15 +207,25 @@ public class Lesson implements Parcelable, Identifiable {
         TextView textViewTime = view.findViewById(R.id.textViewLessonItemTime);
 
         // Bind text views
-        if (status == -1) {
-            textViewStatus.setText("REJECTED");
-            textViewStatus.setTextColor(Color.RED);
-        } else if (status == 0) {
-            textViewStatus.setText("PENDING");
-            textViewStatus.setTextColor(Color.GRAY);
-        } else if (status == 1) {
-            textViewStatus.setText("ACCEPTED");
-            textViewStatus.setTextColor(Color.rgb(0,100,0));
+        if(endTime.before(new Date())){
+            if(status == 0){
+                textViewStatus.setText("EXPIRED");
+                textViewStatus.setTextColor(Color.parseColor("#A52A2A"));  // brown color
+            }else if(status == 1){
+                textViewStatus.setText("COMPLETED");
+                textViewStatus.setTextColor(Color.parseColor("#800080"));  // purple color
+            }
+        }else{
+            if(status == -1){
+                textViewStatus.setText("REJECTED");
+                textViewStatus.setTextColor(Color.RED);
+            }else if(status == 0){
+                textViewStatus.setText("PENDING");
+                textViewStatus.setTextColor(Color.GRAY);
+            }else if(status == 1){
+                textViewStatus.setText("ACCEPTED");
+                textViewStatus.setTextColor(Color.rgb(0,100,0));
+            }
         }
 
         if (tutorName.isEmpty()) textViewTutorName.setVisibility(View.GONE);
