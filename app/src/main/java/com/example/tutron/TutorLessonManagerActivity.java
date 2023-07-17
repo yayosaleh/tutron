@@ -171,6 +171,7 @@ public class TutorLessonManagerActivity extends AppCompatActivity {
 
                         // Attempt to update timeslot document status to booked
                         Timeslot timeslot = new Timeslot(lessonCopy.getTimeslotId(), currentTutorCopy.getId(), lessonCopy.getStartTime(), lessonCopy.getEndTime());
+                        timeslot.setBooked(true);
                         DBHandler.setDocument(lessonCopy.getTimeslotId(), TIMESLOT_COLLECTION, timeslot, new DBHandler.SetDocumentCallback() {
                             @Override
                             public void onSuccess() {

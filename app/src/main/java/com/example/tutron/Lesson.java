@@ -235,7 +235,7 @@ public class Lesson implements Parcelable, Identifiable {
         else textViewStudentName.setText("Student: " + studentName);
 
         if (topicName.isEmpty()) textViewTopicName.setVisibility(View.GONE);
-        else textViewTopicName.setText("Topic: " + topicName);
+        else textViewTopicName.setText("Topic: " + TopicManagerActivity.capitalizeFirstLetterOfEachWord(topicName));
 
         Timeslot timeslot = new Timeslot(null, null, startTime, endTime);
         textViewTime.setText("Time: " + timeslot.toString());

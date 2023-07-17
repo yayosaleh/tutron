@@ -143,6 +143,13 @@ public class Tutor extends User implements Parcelable {
         this.avgRating = avgRating;
     }
 
+    public void updateRating(double newRating) {
+        double totalRating = avgRating * numRatings;
+        totalRating += newRating;
+        numRatings++;
+        avgRating = totalRating / numRatings;
+    }
+
     // Parcelable constructor and methods
 
     protected Tutor(Parcel in) {

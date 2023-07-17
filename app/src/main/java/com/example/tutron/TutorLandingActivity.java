@@ -17,9 +17,11 @@ public class TutorLandingActivity extends AppCompatActivity {
     private static final Class<?> BACK_NAV_DEST = StudentHomeActivity.class;
     private static final Class<?> ON_CLICK_DEST = LessonRequestActivity.class;
     private static final String TOPIC_COLLECTION = "topics";
+    private static final String REVIEW_COLLECTION = "reviews";
     private Student currentStudent;
     private Tutor selectedTutor;
     private ArrayList<Topic> topicList;
+    private ArrayList<Review> reviewList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,9 @@ public class TutorLandingActivity extends AppCompatActivity {
 
         // Populate topic list
         populateTopicList();
+
+        // Populate review list
+        populateReviewList();
     }
 
     // Populates list of topics offered by selected tutor and calls buildTopicsRecyclerView()
@@ -80,6 +85,34 @@ public class TutorLandingActivity extends AppCompatActivity {
             public void onFailure(Exception e) {
                 // Toast failure
                 Toast.makeText(TutorLandingActivity.this, "Failed to get this tutor's topics, try again later.",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void populateReviewList() {
+        // Define query conditions
+        ArrayList<DBHandler.QueryCondition> conditions = new ArrayList<>();
+        conditions.add(new DBHandler.QueryCondition("tutorId", "==", selectedTutor.getId()));
+
+        // Perform query
+        DBHandler.performQuery(REVIEW_COLLECTION, Review.class, conditions, new DBHandler.QueryCallback<Review>() {
+            @Override
+            public void onSuccess(ArrayList<Review> items) {
+                // Toast and return if no reviews found
+                if (items.isEmpty()) {
+                    Toast.makeText(TutorLandingActivity.this, "This tutor has no reviews.",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                // Build recycler view
+                reviewList = items;
+                buildReviewsRecyclerView();
+            }
+            @Override
+            public void onFailure(Exception e) {
+                // Toast failure
+                Toast.makeText(TutorLandingActivity.this, "Failed to get this tutor's reviews, try again later.",
                         Toast.LENGTH_SHORT).show();
             }
         });
@@ -125,5 +158,26 @@ public class TutorLandingActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void buildReviewsRecyclerView() {
+        // Define RV bindings for adapter
+        GenericRVAdapter.Binder<Review> binder = new GenericRVAdapter.Binder<Review>() {
+            @Override
+            public void bindData(Review review, GenericRVAdapter.GenericViewHolder holder) {
+                View reviewItemView = holder.itemView;
+                review.bindToView(reviewItemView);
+            }
+        };
+        // Get the RecyclerView
+        RecyclerView recyclerViewReviews = findViewById(R.id.recyclerViewReviews);
+        // Create the layout manager
+        RecyclerView.LayoutManager reviewsLayoutManager = new LinearLayoutManager(this);
+        // Create the adapter
+        GenericRVAdapter<Review> reviewAdapter = new GenericRVAdapter<>(reviewList, R.layout.review_item, binder);
+        // Set the layout manager
+        recyclerViewReviews.setLayoutManager(reviewsLayoutManager);
+        // Set the adapter
+        recyclerViewReviews.setAdapter(reviewAdapter);
     }
 }

@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
-public class Complaint implements Parcelable {
+public class Complaint implements Parcelable, Identifiable {
     private String id;
     private String tutorId;
     private String tutorName;

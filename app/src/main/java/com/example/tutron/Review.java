@@ -137,7 +137,7 @@ public class Review implements Identifiable{
         textViewCreationDate.setText(sdf.format(creationDate));
 
         // set topic name
-        textViewTopicName.setText(topicName);
+        textViewTopicName.setText(TopicManagerActivity.capitalizeFirstLetterOfEachWord(topicName));
 
         // set rating with a star prefix
         String ratingString = "\u2B50 " + String.valueOf(rating);

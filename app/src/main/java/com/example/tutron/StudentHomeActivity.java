@@ -26,6 +26,7 @@ public class StudentHomeActivity extends AppCompatActivity {
 
     private static final String TAG = "StudentHomeActivity";
     private static final Class<?> TUTOR_SEARCH_DEST = TutorSearchActivity.class;
+    private static final Class<?> MANAGE_LESSONS_DEST = StudentLessonManagerActivity.class;
     private static final String STUDENT_COLLECTION = "students";
     private Student currentStudent;
 
@@ -36,6 +37,7 @@ public class StudentHomeActivity extends AppCompatActivity {
 
         // Declare and initialize view variables
         Button btnLogOff = findViewById(R.id.btnStudentLogOff);
+        Button btnManageLessons = findViewById(R.id.btnStudentManageLessons);
         Button btnSearch = findViewById(R.id.btnTutorSearch);
         EditText editTextSearchFirstName = findViewById(R.id.editTextSearchFirstName);
         EditText editTextSearchLastName = findViewById(R.id.editTextSearchLastName);
@@ -56,6 +58,15 @@ public class StudentHomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Call log off method from util class
                 AuthUtil.signOut(StudentHomeActivity.this);
+            }
+        });
+
+        // Set on click listener for manage lessons button
+        btnManageLessons.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(StudentHomeActivity.this, MANAGE_LESSONS_DEST);
+                startActivity(intent);
             }
         });
 

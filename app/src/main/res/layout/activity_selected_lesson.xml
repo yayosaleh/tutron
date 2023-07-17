@@ -67,12 +67,12 @@
         android:id="@+id/textViewComplaintInstruction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:text="@string/submit_a_complaint"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextReviewBody" />
+        app:layout_constraintTop_toBottomOf="@+id/btnSubmitReview" />
 
     <EditText
         android:id="@+id/editTextComplaint"
@@ -83,7 +83,7 @@
         android:gravity="start|top"
         android:hint="@string/what_s_wrong"
         android:inputType="textMultiLine"
-        android:maxLines="3"
+        android:maxLines="5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewComplaintInstruction" />
@@ -100,5 +100,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextComplaint"
         app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btnSubmitReview"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/submit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextReviewBody" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
