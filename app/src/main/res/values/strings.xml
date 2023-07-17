@@ -87,4 +87,6 @@
     <string name="timeslot_description">Timeslot Description</string>
     <string name="tap_on_a_topic_to_start_your_lesson_request">Tap on a topic to start your lesson request!</string>
     <string name="tap_on_a_timeslot_to_request_a_lesson_at_that_time">Tap on a timeslot to request a lesson at that time.</string>
+    <string name="scroll_through_and_tap_on_a_topic_to_start_your_lesson_request">Scroll through and tap on a topic to start your lesson request.</string>
+    <string name="scroll_through_this_tutor_s_reviews">Scroll through this tutor’s reviews.</string>
 </resources>

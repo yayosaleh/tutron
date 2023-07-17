@@ -27,7 +27,6 @@
             android:id="@+id/textViewTopicName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:text="@string/topic_name"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -38,7 +37,6 @@
             android:id="@+id/textViewTopicYearsOfExperience"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:text="@string/topic_years_of_experience"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewTopicName" />
@@ -47,7 +45,6 @@
             android:id="@+id/textViewTopicDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:text="@string/topic_description"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

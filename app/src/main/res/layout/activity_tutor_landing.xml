@@ -33,8 +33,10 @@
         android:id="@+id/textViewTutorLandingInstruction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
         android:layout_marginTop="10dp"
-        android:text="@string/tap_on_a_topic_to_start_your_lesson_request"
+        android:layout_marginEnd="2dp"
+        android:text="@string/scroll_through_and_tap_on_a_topic_to_start_your_lesson_request"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,9 +45,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewOfferedTopics"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="250dp"
         android:layout_marginTop="10dp"
-        android:minHeight="200dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTutorLandingInstruction" />
@@ -55,7 +56,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Reviews"
+        android:text="@string/scroll_through_this_tutor_s_reviews"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recyclerViewOfferedTopics" />

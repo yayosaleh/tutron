@@ -11,6 +11,7 @@ public class Timeslot implements Identifiable {
     private String tutorId;
     private Date startTime;
     private Date endTime;
+    private Boolean booked = false; // False by default
 
     public Timeslot() {
         // Public no-arg constructor needed to create Firestore documents
@@ -54,6 +55,14 @@ public class Timeslot implements Identifiable {
 
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
+    }
+
+    public Boolean getBooked() {
+        return booked;
+    }
+
+    public void setBooked(Boolean booked) {
+        this.booked = booked;
     }
 
     // To string method for display purposes

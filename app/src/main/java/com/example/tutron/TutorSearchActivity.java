@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 public class TutorSearchActivity extends AppCompatActivity {
     private static final Class<?> BACK_NAV_DEST = StudentHomeActivity.class;
+    private static final Class<?> ON_CLICK_DEST = TutorLandingActivity.class;
     private Student currentStudent;
     private ArrayList<Tutor> tutorList;
 
@@ -74,5 +75,14 @@ public class TutorSearchActivity extends AppCompatActivity {
         // Set adapter
         recyclerViewTutors.setAdapter(tutorAdapter);
         // TODO: item click listener
+        tutorAdapter.setOnItemClickListener(new GenericRVAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                // Navigate to tutor landing and send selected tutor
+                Intent intent = new Intent(TutorSearchActivity.this, ON_CLICK_DEST);
+                intent.putExtra("Selected Tutor", tutorList.get(position));
+                startActivity(intent);
+            }
+        });
     }
 }
