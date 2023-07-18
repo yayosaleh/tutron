@@ -12,18 +12,6 @@ Administrator:
 - email: admin@email.com
 - password: 123456
 
-Tutor 1:
-- email: tutor1@email.com
-- password: 123456
-
-Tutor 2:
-- email: tutor2@email.com
-- password: 123456
-
-Tutor 3:
-- email: tutor3@email.com
-- password: 123456
-
 ***General Notes***
 
 D2:
@@ -32,3 +20,6 @@ D2:
 
 D3:
 - Unit test performed in app/src/test/java/com/example/tutron/StringCapitalizerUnitTest.java
+
+D4:
+- Unit test performed in app/src/test/java/com/example/tutron/TimeslotUnitTest.java
