@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/imageViewTutorItemProfile"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewTutorItemName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/tutor_item_name"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/imageViewTutorItemProfile"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewTutorItemRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/rating_and_number_of_lessons_given"
+            app:layout_constraintStart_toEndOf="@id/imageViewTutorItemProfile"
+            app:layout_constraintTop_toBottomOf="@id/textViewTutorItemName" />
+
+        <TextView
+            android:id="@+id/textViewTutorItemEducation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/tutor_item_education_level"
+            app:layout_constraintEnd_toStartOf="@id/textViewTutorItemLanguage"
+            app:layout_constraintStart_toEndOf="@id/imageViewTutorItemProfile"
+            app:layout_constraintTop_toBottomOf="@id/textViewTutorItemRating" />
+
+        <TextView
+            android:id="@+id/textViewTutorItemLanguage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/tutor_item_native_language"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/textViewTutorItemEducation"
+            app:layout_constraintTop_toBottomOf="@id/textViewTutorItemRating" />
+
+        <TextView
+            android:id="@+id/textViewTutorItemDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/tutor_item_description"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageViewTutorItemProfile" />
+
+        <TextView
+            android:id="@+id/textViewTutorItemHourlyRate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/hourly_rate"
+            app:layout_constraintStart_toEndOf="@+id/imageViewTutorItemProfile"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTutorItemEducation" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

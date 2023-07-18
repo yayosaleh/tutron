@@ -25,10 +25,10 @@ public class TopicAdderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_topic_adder);
 
-        // Get tutor ID and current number of topics passed via intent
+        // Get current tutor and current number of topics passed via intent
 
         Intent intent = getIntent();
-        Tutor currentTutor = intent.getParcelableExtra("Current Tutor");
+        Tutor currentTutor = DataManager.getInstance().getCurrentTutor();
         numTopics = intent.getIntExtra("Number of Topics", 20); // Set default to max as safeguard
 
         // Initialize view variables
@@ -52,9 +52,7 @@ public class TopicAdderActivity extends AppCompatActivity {
         btnBackNav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Must send current tutor back to repopulate intent
                 Intent intent = new Intent(TopicAdderActivity.this, BACK_NAV_DEST);
-                intent.putExtra("Current Tutor", currentTutor);
                 startActivity(intent);
             }
         });

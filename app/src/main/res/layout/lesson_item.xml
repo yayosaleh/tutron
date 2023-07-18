@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
@@ -14,41 +13,45 @@
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/textViewTopicOfferingStatus"
+            android:id="@+id/textViewLessonItemStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/offered"
-            android:textColor="#673AB7"
+            android:text="@string/status"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textViewTopicName"
+            android:id="@+id/textViewLessonItemTutorName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/topic_name"
-            android:textSize="16sp"
-            android:textStyle="bold"
+            android:text="@string/tutorX"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewTopicOfferingStatus" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewLessonItemStatus" />
 
         <TextView
-            android:id="@+id/textViewTopicYearsOfExperience"
+            android:id="@+id/textViewLessonItemStudentName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/topic_years_of_experience"
+            android:text="@string/studentX"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewTopicName" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewLessonItemTutorName" />
 
         <TextView
-            android:id="@+id/textViewTopicDescription"
+            android:id="@+id/textViewLessonItemTopicName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/topic_description"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@string/topic"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewTopicYearsOfExperience" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewLessonItemStudentName" />
+
+        <TextView
+            android:id="@+id/textViewLessonItemTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/time"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewLessonItemTopicName" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

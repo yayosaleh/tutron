@@ -36,14 +36,17 @@ public class TopicManagerActivity extends AppCompatActivity {
     private ArrayList<Topic> offeredTopicList;
     private GenericRVAdapter<Topic> topicAdapter;
 
+    private void updateCurrentTutor() {
+        currentTutor = DataManager.getInstance().getCurrentTutor();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_topic_manager);
 
-        // Get current tutor passed via intent
-        Intent intent = getIntent();
-        currentTutor = intent.getParcelableExtra("Current Tutor");
+        // Get current tutor
+        updateCurrentTutor();
 
         // Initialize view variables
         Button btnBackNav = findViewById(R.id.btnTopicManagerBackNav);
@@ -53,9 +56,7 @@ public class TopicManagerActivity extends AppCompatActivity {
         btnBackNav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Must send current tutor back to repopulate intent
                 Intent intent = new Intent(TopicManagerActivity.this, BACK_NAV_DEST);
-                intent.putExtra("Current Tutor", currentTutor);
                 startActivity(intent);
             }
         });
@@ -77,10 +78,8 @@ public class TopicManagerActivity extends AppCompatActivity {
                     Toast.makeText(TopicManagerActivity.this, message2, Toast.LENGTH_SHORT).show();
                     return;
                 }
-                // Must send current tutor to repopulate intent upon back navigation (and to access id)
                 // Must send current number of topics to limit number of topics added
                 Intent intent = new Intent(TopicManagerActivity.this, ADD_TOPIC_DEST);
-                intent.putExtra("Current Tutor", currentTutor);
                 intent.putExtra("Number of Topics", topicList.size());
                 startActivity(intent);
             }
@@ -91,8 +90,18 @@ public class TopicManagerActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        // Update current tutor (needed for back navigation)
+        updateCurrentTutor();
+
         // Populate topic lists from DB everytime activity is navigated to
         populateLists();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Set current tutor for use by downstream activities
+        DataManager.getInstance().setCurrentTutor(currentTutor);
     }
 
     // Populates topic list and offered topic list
@@ -288,9 +297,7 @@ public class TopicManagerActivity extends AppCompatActivity {
         for (Topic topic : offeredTopicList) offeredTopicNames.add(topic.getName());
 
         // Copy current tutor and update list of offered topic names
-        Tutor currentTutorCopy = new Tutor(currentTutor.getId(), currentTutor.getFirstName(),
-                currentTutor.getLastName(), currentTutor.getEducationLevel(),
-                currentTutor.getNativeLanguage(), currentTutor.getDescription(), currentTutor.getProfilePic());
+        Tutor currentTutorCopy = currentTutor.copy();
         currentTutorCopy.setOfferedTopicNames(offeredTopicNames);
 
         // Attempt to update tutor document in DB

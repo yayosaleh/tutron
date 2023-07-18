@@ -84,6 +84,18 @@ public class TutorHomeActivity extends AppCompatActivity {
                 });
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        /*
+        Set current tutor for use by downstream activities
+        - In this activity, onPause() is only called if the tutor logs off, or following
+        the call to checkSuspensionStatus() which launches an intent
+        - If we navigate to a downstream activity currentTutor is guaranteed to be non-null
+        */
+        DataManager.getInstance().setCurrentTutor(currentTutor);
+    }
+
     // Checks suspension status and navigates or changes text view accordingly
     private void checkSuspensionStatus() {
         String suspensionExpiry = currentTutor.getSuspensionExpiry();
@@ -91,7 +103,6 @@ public class TutorHomeActivity extends AppCompatActivity {
         // Navigate to TutorProfileActivity if tutor is not suspended (and return)
         if (suspensionExpiry == null) {
             Intent intent = new Intent(TutorHomeActivity.this, UNSUSPENDED_DEST);
-            intent.putExtra("Current Tutor", currentTutor);
             startActivity(intent);
             return;
         }
@@ -113,10 +124,5 @@ public class TutorHomeActivity extends AppCompatActivity {
         // Set welcome message text view to suspension message
         TextView textViewWelcomeMessage = findViewById(R.id.textViewTutorWelcomeMessage);
         textViewWelcomeMessage.setText(suspensionMessage);
-
-        // TODO: Prevent further user interaction if suspended
-        //  Hide buttons if tutor is suspended (via some flag), OR
-        //  Set a timer and send user back to main activity, OR
-        //  Make this a proxy activity
     }
 }

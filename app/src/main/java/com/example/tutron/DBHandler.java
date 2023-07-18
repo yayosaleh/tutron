@@ -10,6 +10,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -26,6 +27,37 @@ public class DBHandler {
     public interface SetDocumentCallback {
         void onSuccess(); // Called when a document is successfully set
         void onFailure(Exception e); // Called upon failure to set document
+    }
+
+    // Interface allows front-end callers to perform operations upon successful or failed query
+    public interface QueryCallback<T> {
+        void onSuccess(ArrayList<T> items); // Called when a query is successfully performed
+        void onFailure(Exception e); // Called when a query fails
+    }
+
+    // Class used to construct query conditions
+    public static class QueryCondition {
+        String field;
+        String operator;
+        Object value;
+
+        public QueryCondition(String field, String operator, Object value) {
+            this.field = field;
+            this.operator = operator;
+            this.value = value;
+        }
+
+        public String getField() {
+            return field;
+        }
+
+        public String getOperator() {
+            return operator;
+        }
+
+        public Object getValue() {
+            return value;
+        }
     }
 
     // GENERIC OPERATIONS //
@@ -148,6 +180,66 @@ public class DBHandler {
         }
 
         return objectList;
+    }
+
+    // Performs Firestore query with provided conditions and invokes callback
+    public static <T> void performQuery(String collectionId, Class<T> itemClass, ArrayList<QueryCondition> conditions, QueryCallback<T> callback) {
+        // Set query to base collection
+        Query query = FirebaseFirestore.getInstance().collection(collectionId);
+
+        // If provided conditions, augment query
+        if (conditions != null) {
+            for (QueryCondition condition : conditions) {
+                switch (condition.getOperator()) {
+                    case "==":
+                        query = query.whereEqualTo(condition.getField(), condition.getValue());
+                        break;
+                    case "!=":
+                        query = query.whereNotEqualTo(condition.getField(), condition.getValue());
+                        break;
+                    case ">":
+                        query = query.whereGreaterThan(condition.getField(), condition.getValue());
+                        break;
+                    case ">=":
+                        query = query.whereGreaterThanOrEqualTo(condition.getField(), condition.getValue());
+                        break;
+                    case "<":
+                        query = query.whereLessThan(condition.getField(), condition.getValue());
+                        break;
+                    case "<=":
+                        query = query.whereLessThanOrEqualTo(condition.getField(), condition.getValue());
+                        break;
+                    case "array-contains":
+                        query = query.whereArrayContains(condition.getField(), condition.getValue());
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Invalid operator: " + condition.getOperator());
+                }
+            }
+        }
+
+        // Perform query
+        query.get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot querySnapshot) {
+                        // Log success
+                        Log.d(TAG, "performQuery:success");
+
+                        // Invoke success call back
+                        callback.onSuccess(querySnapshotToList(querySnapshot, itemClass));
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Log failure
+                        Log.w(TAG, "performQuery:failure", e);
+
+                        // Invoke failure callback
+                        callback.onFailure(e);
+                    }
+                });
     }
 
     // SPECIFIC OPERATIONS //

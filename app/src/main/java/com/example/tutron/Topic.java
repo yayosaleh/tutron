@@ -1,6 +1,11 @@
 package com.example.tutron;
 
-public class Topic implements Identifiable {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
+public class Topic implements Identifiable, Parcelable {
     private String id;
     private String tutorId;
     private String name;
@@ -67,5 +72,42 @@ public class Topic implements Identifiable {
 
     public void setOffered(Boolean offered) {
         this.offered = offered;
+    }
+
+    protected Topic(Parcel in) {
+        id = in.readString();
+        tutorId = in.readString();
+        name = in.readString();
+        yearsOfExperience = in.readInt();
+        description = in.readString();
+        byte tmpOffered = in.readByte();
+        offered = tmpOffered == 0 ? null : tmpOffered == 1;
+    }
+
+    public static final Creator<Topic> CREATOR = new Creator<Topic>() {
+        @Override
+        public Topic createFromParcel(Parcel in) {
+            return new Topic(in);
+        }
+
+        @Override
+        public Topic[] newArray(int size) {
+            return new Topic[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(tutorId);
+        dest.writeString(name);
+        dest.writeInt(yearsOfExperience);
+        dest.writeString(description);
+        dest.writeByte((byte) (offered == null ? 0 : offered ? 1 : 2));
     }
 }
